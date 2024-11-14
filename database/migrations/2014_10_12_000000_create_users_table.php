@@ -12,17 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('unique_ref')->unique();
-            $table->string('role')->default('user')->comment('companyadmin', 'orgadmin', 'orgmember', 'user');
-            $table->unsignedBigInteger('org_id');
+            $table->bigIncrements('id');
+            $table->string('unique_ref')
+                ->unique()
+                ->nullable();
+            $table->string('role')
+                ->default('user')
+                ->comment('companyadmin, orgadmin, orgmember, user');
+            $table->unsignedBigInteger('org_id')
+                ->nullable();
             $table->string('first_name');
-            $table->string('last_name');
-            $table->string('full_name_slug');
+            $table->string('last_name')->nullable();
+            $table->string('full_name_slug')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('status')->default('active')->comment('active', 'inactive', 'suspended');
+            $table->string('status')
+                ->default('active')
+                ->comment('active, inactive, suspended');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
