@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label class="font-weight-semibold" for="email">Email:</label>
                                 <div class="input-affix">
-                                    <i class="prefix-icon anticon anticon-user"></i>
+                                    <i class="prefix-icon anticon anticon-mail"></i>
                                     <input type="text" class="form-control" id="email" placeholder="Email"
                                         name="email" autofocus autocomplete="off">
                                 </div>
