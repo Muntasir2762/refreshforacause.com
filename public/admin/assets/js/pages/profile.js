@@ -104,7 +104,7 @@ eval("class PagesProfile {\r\n\r\n    static init() {\r\n\r\n        $('#list-vi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\Users\\Nate\\Desktop\\starter\\app\\assets\\es6\\pages\\profile.js */\"./app/assets/es6/pages/profile.js\");\n\n\n//# sourceURL=webpack:///multi_./app/assets/es6/pages/profile.js?");
+eval("module.exports = __webpack_require__(/*! C:\\Users\\Nate\\Desktop\\themeforest selling\\Enlink-bootstrap\\v1.0.0\\Enlink - Bootstrap Admin Template\\demo\\app\\assets\\es6\\pages\\profile.js */\"./app/assets/es6/pages/profile.js\");\n\n\n//# sourceURL=webpack:///multi_./app/assets/es6/pages/profile.js?");
 
 /***/ })
 

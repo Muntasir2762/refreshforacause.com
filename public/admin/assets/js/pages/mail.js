@@ -104,7 +104,7 @@ eval("class AppMail {\r\n\r\n    static init() {\r\n        $('#mail-list .mail-
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\Users\\Nate\\Desktop\\starter\\app\\assets\\es6\\pages\\mail.js */\"./app/assets/es6/pages/mail.js\");\n\n\n//# sourceURL=webpack:///multi_./app/assets/es6/pages/mail.js?");
+eval("module.exports = __webpack_require__(/*! C:\\Users\\Nate\\Desktop\\themeforest selling\\Enlink-bootstrap\\v1.0.0\\Enlink - Bootstrap Admin Template\\demo\\app\\assets\\es6\\pages\\mail.js */\"./app/assets/es6/pages/mail.js\");\n\n\n//# sourceURL=webpack:///multi_./app/assets/es6/pages/mail.js?");
 
 /***/ })
 
