@@ -27,3 +27,7 @@ Route::get('/admin-dashboard', function () {
 Route::get('/admin-default', function () {
     return view('admin.layout.default');
 });
+
+Route::get('/admin-login', function () {
+    return view('admin.auth.login');
+});
