@@ -20,6 +20,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/admin-layout', function () {
+Route::get('/admin-dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/admin-default', function () {
     return view('admin.layout.default');
 });
