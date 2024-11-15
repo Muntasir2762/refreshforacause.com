@@ -22,14 +22,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/admin-dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/admin-default', function () {
-    return view('admin.layout.default');
-});
-
-Route::get('/admin-login', function () {
-    return view('admin.auth.login');
+Route::get('/setting', function () {
+    return view('admin.setting.index');
 });
