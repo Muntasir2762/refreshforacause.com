@@ -26,6 +26,7 @@ return new class extends Migration
                 ->default('up')
                 ->comment('up, down, maintanence');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

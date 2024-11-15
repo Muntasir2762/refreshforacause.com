@@ -22,20 +22,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/admin-dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/admin-default', function () {
-    return view('admin.layout.default');
-});
-
-Route::get('/admin-login', function () {
-    return view('admin.auth.login');
-});
 
 
 Route::middleware(['role:companyadmin'])->prefix('site-settings')->group(function () {
     Route::get('/', [SiteSettingController::class, 'index'])->name('site-settings.index');
-    Route::put('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
+    Route::post('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
 });

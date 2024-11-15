@@ -17,24 +17,33 @@ class SiteSettingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        $setting = SiteSetting::first();
+        return view('admin.setting.site-index', compact([
+            'setting'
+        ]));
+    }
 
     public function update(Request $request, string $id)
     {
         $request->validate(
             [
+                'email' => 'required|email',
+                'phone' => 'required',
+                'address' => 'nullable',
                 'favicon' => 'nullable|image|mimes:png,jpg,jpeg|min:1|max:129',
                 'logo' => 'nullable|image|mimes:png,jpg,jpeg|min:1|max:129',
                 'fold_logo' => 'nullable|image|mimes:png,jpg,jpeg|min:1|max:129',
 
             ],
             [
-                'favicon.min' => 'Invalid logo image',
-                'favicon.max' => 'Logo image cannot be more than 128Kb',
-                'logo.min' => 'Invalid background image',
-                'logo.max' => 'Background image cannot be more than 5Mb',
-                'fold_logo.min' => 'Invalid background image',
-                'fold_logo.max' => 'Background image cannot be more than 5Mb'
+                'favicon.min' => 'Invalid favicon',
+                'favicon.max' => 'Favicon cannot be more than 128Kb',
+                'logo.min' => 'Invalid logo',
+                'logo.max' => 'Logo cannot be more than 5Mb',
+                'fold_logo.min' => 'Invalid fold-logo',
+                'fold_logo.max' => 'Fold-logo cannot be more than 5Mb'
             ]
         );
 
@@ -104,6 +113,10 @@ class SiteSettingController extends Controller
             $siteSetting->fold_logo_dir = $fileDir;
             $siteSetting->fold_logo_file_name = $newFileName;
         }
+
+        $siteSetting->email = $request->email;
+        $siteSetting->phone = $request->phone;
+        $siteSetting->address = $request->address;
 
         $siteSetting->save();
         return back()->with($this->successAlert('Successfully updated!'));
