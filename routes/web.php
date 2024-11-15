@@ -22,12 +22,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/setting', function () {
-    return view('admin.setting.index');
-});
 
 
 Route::middleware(['role:companyadmin'])->prefix('site-settings')->group(function () {
     Route::get('/', [SiteSettingController::class, 'index'])->name('site-settings.index');
-    Route::put('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
+    Route::post('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
 });

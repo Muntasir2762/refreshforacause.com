@@ -62,13 +62,13 @@
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
                     </a>
-                    <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="{{ route('site-settings.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-project"></i>
-                                <span class="m-l-10">Projects</span>
+                                <i class="anticon opacity-04 font-size-16 anticon-setting"></i>
+                                <span class="m-l-10">Settings</span>
                             </div>
-                            <i class="anticon font-size-10 anticon-right"></i>
+
                         </div>
                     </a>
                     <form method="POST" action="{{ route('logout') }}" id='logoutForm'>
@@ -81,7 +81,7 @@
                                     <i class="anticon opacity-04 font-size-16 anticon-logout"></i>
                                     <span class="m-l-10">Logout</span>
                                 </div>
-                                <i class="anticon font-size-10 anticon-right"></i>
+
                             </div>
                         </a>
                     </form>

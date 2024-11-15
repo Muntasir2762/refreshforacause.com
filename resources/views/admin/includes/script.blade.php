@@ -11,7 +11,6 @@
 <script src="{{ asset('admin/assets/js/app.min.js') }}"></script>
 <script>
     @if (session('alert'))
-        toastr.success('ok')
         @if (session('alert')['type'] == 'success')
             toastr.success("{{ session('alert')['msg'] }}")
         @elseif (session('alert')['type'] == 'error')

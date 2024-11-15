@@ -15,16 +15,15 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <b>Email</b> <br>
-                            sample.com
+                            {{ $setting->email }}
                         </li>
                         <li class="list-group-item">
                             <b>Phone</b> <br>
-                            0170000000
+                            {{ $setting->phone }}
                         </li>
                         <li class="list-group-item">
                             <b>Address</b> <br>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tenetur quidem dolorem
-                            consequatur aliquid deleniti ad asperiores. Debitis, maiores fugiat.
+                            {{ $setting->address }}
                         </li>
                         <li class="list-group-item">
                             <b>Images</b> <br>
@@ -36,14 +35,14 @@
         <div class="col-md-8 col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('site-settings.update', ['id' => $setting->id]) }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Company email" autofocus>
+                                        placeholder="Company email" value="{{ $setting->email }}" required>
                                     {{-- <small id="helpId" class="text-muted">Help text</small> --}}
                                 </div>
                             </div>
@@ -51,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input type="tel" name="phone" id="phone" class="form-control"
-                                        placeholder="Company phone">
+                                        placeholder="Company phone" value="{{ $setting->phone }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -75,12 +74,12 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" name="address" rows="5"></textarea>
+                                    <textarea class="form-control" name="address" rows="5">{{ $setting->address }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group text-right">
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                    <button class="btn btn-primary text-uppercase" type="submit">SAVE</button>
                                 </div>
                             </div>
                         </div>
