@@ -27,6 +27,23 @@
                         </li>
                         <li class="list-group-item">
                             <b>Images</b> <br>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <small class="text-muted">Favicon</small>
+                                    <br>
+                                    <img src="{{ asset('images/site/favicon/favicon.png') }}" alt="favicon">
+                                </div>
+                                <div class="col-auto">
+                                    <small class="text-muted">Logo</small>
+                                    <br>
+                                    <img src="{{ asset('images/site/logo/logo.png') }}" alt="logo">
+                                </div>
+                                <div class="col-auto">
+                                    <small class="text-muted">Fold Logo</small>
+                                    <br>
+                                    <img src="{{ asset('images/site/fold-logo/fold_logo.png') }}" alt="fold-logo">
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +52,8 @@
         <div class="col-md-8 col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('site-settings.update', ['id' => $setting->id]) }}" method="post">
+                    <form action="{{ route('site-settings.update', ['id' => $setting->id]) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
