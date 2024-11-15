@@ -33,3 +33,9 @@ Route::get('/admin-default', function () {
 Route::get('/admin-login', function () {
     return view('admin.auth.login');
 });
+
+
+Route::middleware(['role:companyadmin'])->prefix('site-settings')->group(function () {
+    Route::get('/', [SiteSettingController::class, 'index'])->name('site-settings.index');
+    Route::put('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
+});
