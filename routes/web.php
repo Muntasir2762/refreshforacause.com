@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteSettingController;
 use Illuminate\Support\Facades\Route;
+
 
 require __DIR__ . '/auth.php';
 

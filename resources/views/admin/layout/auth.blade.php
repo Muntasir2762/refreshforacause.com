@@ -9,7 +9,7 @@
     </title>
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/logo/favicon.png') }}">
     <link href="{{ asset('admin/assets/css/app.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendors/toastr/css/toastr.css') }}">
 </head>
 
 <body>
@@ -29,7 +29,28 @@
 
 
     <script src="{{ asset('admin/assets/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendors/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/toastr-setup.js') }}"></script>
     <script src="{{ asset('admin/assets/js/app.min.js') }}"></script>
+    <script>
+        @if (session('alert'))
+            @if (session('alert')['type'] == 'success')
+                toastr.success("{{ session('alert')['msg'] }}")
+            @elseif (session('alert')['type'] == 'error')
+                toastr.error("{{ session('alert')['msg'] }}")
+            @elseif (session('alert')['type'] == 'warning')
+                toastr.warning("{{ session('alert')['msg'] }}")
+            @elseif (session('alert')['type'] == 'info')
+                toastr.info("{{ session('alert')['msg'] }}")
+            @endif
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+    </script>
 
 </body>
 

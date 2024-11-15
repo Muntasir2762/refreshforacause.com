@@ -14,18 +14,10 @@ class SiteSettingController extends Controller
 {
 
     use AlertTrait, HelperTrait;
-
-    public function index()
-    {
-        $siteSetting = SiteSetting::latest()->first();
-        if (!$siteSetting) {
-            $siteSetting = new SiteSetting();
-            $siteSetting->save();
-            $siteSetting = SiteSetting::latest()->first();
-        }
-        
-        return $siteSetting;
-    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function index() {}
 
     public function update(Request $request, string $id)
     {
