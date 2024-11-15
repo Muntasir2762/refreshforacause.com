@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('favicon')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('fold_logo')->nullable();
+            $table->string('favicon_dir')->nullable();
+            $table->string('favicon_file_name')->nullable();
+            $table->string('logo_dir')->nullable();
+            $table->string('logo_file_name')->nullable();
+            $table->string('fold_logo_dir')->nullable();
+            $table->string('fold_logo_file_name')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
