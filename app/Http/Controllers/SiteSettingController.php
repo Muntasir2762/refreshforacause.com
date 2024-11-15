@@ -15,10 +15,7 @@ class SiteSettingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        dd($this->generateUniqueCode());
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.

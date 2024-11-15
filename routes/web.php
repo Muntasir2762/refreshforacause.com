@@ -33,5 +33,3 @@ Route::get('/admin-default', function () {
 Route::get('/admin-login', function () {
     return view('admin.auth.login');
 });
-
-Route::get('/uuid', [SiteSettingController::class, 'index']);
