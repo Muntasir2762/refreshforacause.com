@@ -10,4 +10,14 @@ class SiteSetting extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $fillable = [
+        'favicon',
+        'logo',
+        'fold_logo',
+        'address',
+        'phone',
+        'email',
+        'status'
+    ];
 }
