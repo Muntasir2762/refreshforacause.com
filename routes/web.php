@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteSettingController;
 use Illuminate\Support\Facades\Route;
+
 
 require __DIR__ . '/auth.php';
 
@@ -31,3 +33,5 @@ Route::get('/admin-default', function () {
 Route::get('/admin-login', function () {
     return view('admin.auth.login');
 });
+
+Route::get('/uuid', [SiteSettingController::class, 'index']);

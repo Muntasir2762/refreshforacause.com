@@ -17,7 +17,7 @@ class SiteSettingController extends Controller
      */
     public function index()
     {
-        //
+        dd($this->generateUniqueCode());
     }
 
     /**
