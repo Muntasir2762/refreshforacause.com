@@ -81,7 +81,58 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            ...
+                            <form action="" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="first_name">First Name</label>
+                                            <input type="text" name="first_name" id="first_name" class="form-control"
+                                                placeholder="First Name" value="{{ Auth::user()->first_name }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name</label>
+                                            <input type="text" name="last_name" id="last_name" class="form-control"
+                                                placeholder="First Name" value="{{ Auth::user()->last_name }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" id="email" class="form-control"
+                                                placeholder="Company email" value="{{ Auth::user()->email }}" required>
+                                            {{-- <small id="helpId" class="text-muted">Help text</small> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input type="tel" name="phone" id="phone" class="form-control"
+                                                placeholder="Company phone" value="{{ Auth::user()->phone }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" name="Image" id="image" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <textarea class="form-control" name="address" rows="5">{{ Auth::user()->address }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group text-right">
+                                            <button class="btn btn-primary text-uppercase" type="submit">SAVE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                             <form action="" method="post">
@@ -101,8 +152,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="retype_password">Retype Password</label>
-                                            <input type="password" name="retype_password_confirmation" id="retype_password"
-                                                class="form-control" placeholder="Retype password" required>
+                                            <input type="password" name="retype_password_confirmation"
+                                                id="retype_password" class="form-control" placeholder="Retype password"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
