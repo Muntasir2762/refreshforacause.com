@@ -11,7 +11,7 @@
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between m-b-30">
-                            <img class="img-fluid" alt="" src="{{ asset('admin/assets/images/logo/logo.png') }}">
+                            <img class="img-fluid" alt="" src="{{ asset('images/site/logo/logo.png') }}">
                             <h2 class="m-b-0">Login</h2>
                         </div>
                         <form method="POST" action="{{ route('login') }}">

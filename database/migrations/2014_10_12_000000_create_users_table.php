@@ -30,10 +30,13 @@ return new class extends Migration
             $table->string('status')
                 ->default('active')
                 ->comment('active, inactive, suspended');
+            $table->text('image')->nullable();
+            $table->text('avatar_image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
