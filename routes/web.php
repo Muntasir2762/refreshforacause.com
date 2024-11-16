@@ -24,7 +24,22 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::middleware(['role:companyadmin'])->prefix('site-settings')->group(function () {
-    Route::get('/', [SiteSettingController::class, 'index'])->name('site-settings.index');
-    Route::post('/{id}', [SiteSettingController::class, 'update'])->name('site-settings.update');
-});
+Route::middleware(['role:companyadmin'])
+    ->prefix('site-settings')
+    ->name('site-settings.')
+    ->group(function () {
+        Route::get('/', [SiteSettingController::class, 'index'])
+            ->name('index');
+        Route::post('/{id}', [SiteSettingController::class, 'update'])
+            ->name('update');
+    });
+
+//BE = Backend or Back Office for admin users
+Route::prefix('profile')
+    ->name('be.profile.')
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('/', function () {
+            return view('admin.profile.profile-index');
+        })->name('index');
+    });
