@@ -58,15 +58,26 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{ route('site-settings.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-setting"></i>
-                                <span class="m-l-10">Settings</span>
-                            </div>
+                    @if (Auth::user()->role === 'companyadmin')
+                        <a href="{{ route('site-settings.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="anticon opacity-04 font-size-16 anticon-setting"></i>
+                                    <span class="m-l-10">Settings</span>
+                                </div>
 
-                        </div>
-                    </a>
+                            </div>
+                        </a>
+                        <a href="{{ route('social-media.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="anticon opacity-04 font-size-16 anticon-global"></i>
+                                    <span class="m-l-10">Social Media</span>
+                                </div>
+
+                            </div>
+                        </a>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}" id='logoutForm'>
                         @csrf
                         <a href="{{ route('logout') }}" class="dropdown-item d-block p-h-15 p-v-10"

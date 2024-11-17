@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyAdmin\ProfileController as CompanyAdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
+use App\Http\Controllers\SocialMediaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,17 +23,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
-
 Route::middleware(['role:companyadmin'])
-    ->prefix('site-settings')
-    ->name('site-settings.')
     ->group(function () {
-        Route::get('/', [SiteSettingController::class, 'index'])
-            ->name('index');
-        Route::post('/{id}', [SiteSettingController::class, 'update'])
-            ->name('update');
+        Route::prefix('site-settings')
+            ->name('site-settings.')
+            ->group(function () {
+                Route::get('/', [SiteSettingController::class, 'index'])
+                    ->name('index');
+                Route::post('/{id}', [SiteSettingController::class, 'update'])
+                    ->name('update');
+            });
+
+        Route::prefix('social-media')
+            ->name('social-media.')
+            ->group(function () {
+                Route::get('/', [SocialMediaController::class, 'index'])
+                    ->name('index');
+                Route::post('/bulk-update', [SocialMediaController::class, 'update'])
+                    ->name('bulk.update');
+            });
     });
 
 //BE = Backend or Back Office for admin users
