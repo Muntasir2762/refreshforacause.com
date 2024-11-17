@@ -14,6 +14,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    // Directory Constants
+    const PROFILE_IMAGE_DIR = 'images/user/profile/';
+    const AVATAR_IMAGE_DIR = 'images/user/avatar/';
+
     const ROLE_MAP = [
         'companyadmin' => 'Admin',
         'orgadmin' => 'Organization',
