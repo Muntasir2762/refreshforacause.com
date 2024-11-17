@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyAdmin\ProfileController as CompanyAdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SocialMediaController;
@@ -44,11 +45,14 @@ Route::middleware(['role:companyadmin'])
     });
 
 //BE = Backend or Back Office for admin users
-Route::prefix('profile')
+Route::middleware(['role:companyadmin'])
     ->name('be.profile.')
     ->middleware(['auth'])
     ->group(function () {
-        Route::get('/', function () {
-            return view('admin.profile.profile-index');
-        })->name('index');
+        Route::get('/', [CompanyAdminProfileController::class, 'index'])
+            ->name('index');
+        Route::post('/{id}', [CompanyAdminProfileController::class, 'update'])
+            ->name('update');
+        Route::post('/password/{id}', [CompanyAdminProfileController::class, 'updatePassword'])
+            ->name('password');  
     });
