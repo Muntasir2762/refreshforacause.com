@@ -16,12 +16,12 @@ class ProfileController extends Controller
 {
     use AlertTrait, HelperTrait;
 
-    public function index ()
+    public function index()
     {
         return view('admin.profile.profile-index');
     }
 
-    public function update (Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         $request->validate(
             [
@@ -29,14 +29,14 @@ class ProfileController extends Controller
                 'last_name' => 'required',
                 'phone' => 'required|string',
                 'address' => 'nullable|string',
-                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:129',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5121',
             ],
             [
                 'first_name.required' => 'First name is required.',
                 'last_name.required' => 'Last name is required.',
                 'image.image' => 'The uploaded file must be an image.',
                 'image.mimes' => 'Image must be a file of type: png, jpg, jpeg.',
-                'image.max' => 'Image cannot exceed 129KB.',
+                'image.max' => 'Image cannot exceed 5MB.',
             ]
         );
 
@@ -64,13 +64,13 @@ class ProfileController extends Controller
 
                 Image::make($reqFile)
                     ->resize(40, 40)
-                    ->save($avatarDir . $newAvatarImgName);    
+                    ->save($avatarDir . $newAvatarImgName);
             } catch (Exception $e) {
                 return back()->with($this->errorAlert('Failed to upload!'));
             }
 
-            $profile->image = $profileDir.$newProfileImgName;
-            $profile->avatar_image = $avatarDir.$newAvatarImgName;
+            $profile->image = $profileDir . $newProfileImgName;
+            $profile->avatar_image = $avatarDir . $newAvatarImgName;
         }
 
         $profile->first_name = $request->first_name;
@@ -81,10 +81,9 @@ class ProfileController extends Controller
 
         $profile->save();
         return back()->with($this->successAlert('Successfully updated!'));
-
     }
 
-    public function updatePassword (Request $request, string $id)
+    public function updatePassword(Request $request, string $id)
     {
         $request->validate([
             'current_password' => 'required',

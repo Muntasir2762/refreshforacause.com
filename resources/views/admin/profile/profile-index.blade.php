@@ -34,7 +34,9 @@
                                         <div class="text-center text-sm-left ">
                                             <div class="avatar avatar-image" style="width: 150px; height:150px">
                                                 <img src="
-                                                @if (!Auth::user()->image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444 @endif
+                                                @if (!Auth::user()->image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444
+                                                @else
+                                                {{ asset(Auth::user()->image) }} @endif
                                                 "
                                                     alt="profile_image">
                                             </div>
@@ -81,7 +83,8 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <form action="{{ route('be.profile.update', ['id' => Auth::user()->id]) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('be.profile.update', ['id' => Auth::user()->id]) }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -152,9 +155,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="retype_password">Retype Password</label>
-                                            <input type="password" name="new_password_confirmation"
-                                                id="retype_password" class="form-control" placeholder="Retype password"
-                                                required>
+                                            <input type="password" name="new_password_confirmation" id="retype_password"
+                                                class="form-control" placeholder="Retype password" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
