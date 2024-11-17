@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\SocialMedia;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SocialMedia>
@@ -12,12 +13,14 @@ class SocialMediaFactory extends Factory
 {
 
     const MEDIA_TYPE = [
-        1 => 'facebook',
-        2 => 'x',
-        3 => 'instagram',
-        4 => 'youtube',
-        5 => 'linkedin'
+        'facebook',
+        'x',
+        'instagram',
+        'youtube',
+        'linkedin'
     ];
+
+
 
     /**
      * Define the model's default state.
@@ -26,10 +29,19 @@ class SocialMediaFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'platform' => $platform = SocialMediaFactory::MEDIA_TYPE[mt_rand(1, 5)],
-            'link_type' => 'link',
-            'platform_slug' => Str::slug($platform)
-        ];
+        return [];
+    }
+
+    public static function seedPredefinedData()
+    {
+        foreach (self::MEDIA_TYPE as $platform) {
+            SocialMedia::firstOrCreate(
+                ['platform' => $platform],
+                [
+                    'link_type' => 'link',
+                    'platform_slug' => Str::slug($platform),
+                ]
+            );
+        }
     }
 }

@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SocialMedia;
 use Illuminate\Http\Request;
+use App\Traits\AlertTrait;
 
 class SocialMediaController extends Controller
 {
+
+    use AlertTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.social-media.social-media-index');
+        $media = SocialMedia::orderBy('platform', 'asc')->get();
+        return view('admin.social-media.social-media-index', compact(['media']));
     }
 
     /**
@@ -49,9 +54,26 @@ class SocialMediaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $hasOneUpdate = false;
+        if ($request->platform && count($request->platform)) {
+            foreach ($request->platform as $key => $value) {
+                $media = SocialMedia::where('id', $key)->firstOrFail();
+                if ($value != null && $media) {
+                    $media->link = $value;
+                    $media->save();
+                    if (!$hasOneUpdate) {
+                        $hasOneUpdate = true;
+                    }
+                }
+            }
+        }
+
+        if ($hasOneUpdate) {
+            return back()->with($this->successAlert('Successfully updated!'));
+        }
+        return back();
     }
 
     /**

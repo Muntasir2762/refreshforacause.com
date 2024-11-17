@@ -39,7 +39,7 @@ Route::middleware(['role:companyadmin'])
                 Route::get('/', [SocialMediaController::class, 'index'])
                     ->name('index');
                 Route::post('/bulk-update', [SocialMediaController::class, 'update'])
-                    ->name('update');
+                    ->name('bulk.update');
             });
     });
 
