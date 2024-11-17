@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SiteSettingSeeder::class);
         \App\Models\User::factory(1)->create();
+        //Social Media Seeder is 5 because we have 5 hardcoded media for the compamy
+        \App\Models\SocialMedia::factory(5)->create();
     }
 }
