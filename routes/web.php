@@ -43,5 +43,7 @@ Route::middleware(['role:companyadmin'])
         Route::get('/', [CompanyAdminProfileController::class, 'index'])
             ->name('index');
         Route::post('/{id}', [CompanyAdminProfileController::class, 'update'])
-            ->name('update');    
+            ->name('update');
+        Route::post('/password/{id}', [CompanyAdminProfileController::class, 'updatePassword'])
+            ->name('password');  
     });

@@ -10,6 +10,7 @@ use App\Traits\AlertTrait;
 use App\Traits\HelperTrait;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -81,5 +82,24 @@ class ProfileController extends Controller
         $profile->save();
         return back()->with($this->successAlert('Successfully updated!'));
 
+    }
+
+    public function updatePassword (Request $request, string $id)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->with($this->errorAlert('Current password is incorrect!'));
+        }
+
+        $user->password = Hash::make($request->new_password);
+
+        $user->save();
+        return back()->with($this->successAlert('Successfully updated!'));
     }
 }
