@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <form action="" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('be.profile.update', ['id' => Auth::user()->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -102,7 +102,7 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                placeholder="Company email" value="{{ Auth::user()->email }}" required>
+                                                placeholder="Company email" value="{{ Auth::user()->email }}" readonly>
                                             {{-- <small id="helpId" class="text-muted">Help text</small> --}}
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="image">Image</label>
-                                            <input type="file" name="Image" id="image" class="form-control">
+                                            <input type="file" name="image" id="image" class="form-control">
                                         </div>
                                     </div>
 
