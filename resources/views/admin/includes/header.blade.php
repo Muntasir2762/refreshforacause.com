@@ -29,7 +29,11 @@
             <li class="dropdown dropdown-animated scale-left">
                 <div class="pointer" data-toggle="dropdown">
                     <div class="avatar avatar-image  m-h-10 m-r-15">
-                        <img src="@if (!Auth::user()->image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444 @endif"
+                        <img src="
+                                                @if (!Auth::user()->avatar_image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444
+                                                @else
+                                                {{ asset(Auth::user()->avatar_image) }} @endif
+                                                "
                             alt="avatar">
                     </div>
                 </div>
@@ -37,7 +41,11 @@
                     <div class="p-h-20 p-b-15 m-b-10 border-bottom">
                         <div class="d-flex m-r-50">
                             <div class="avatar avatar-lg avatar-image">
-                                <img src="@if (!Auth::user()->image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444 @endif"
+                                <img src="
+                                                @if (!Auth::user()->avatar_image) https://ui-avatars.com/api/?name={{ Auth::user()->full_name }}&background=f3f3f3&color=444444
+                                                @else
+                                                {{ asset(Auth::user()->avatar_image) }} @endif
+                                                "
                                     alt="avatar">
                             </div>
                             <div class="m-l-10">
