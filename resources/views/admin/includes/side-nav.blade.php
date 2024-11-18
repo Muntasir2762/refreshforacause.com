@@ -25,7 +25,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="">View All</a>
+                        <a href="{{ route('manage.org.index') }}">View All</a>
                     </li>
                     <li>
                         <a href="">Add New</a>

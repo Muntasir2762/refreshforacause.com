@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyAdmin\OrganizationController;
 use App\Http\Controllers\CompanyAdmin\ProfileController as CompanyAdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
@@ -42,6 +43,15 @@ Route::middleware(['role:companyadmin'])
                 Route::post('/bulk-update', [SocialMediaController::class, 'update'])
                     ->name('bulk.update');
             });
+
+        Route::prefix('manage-org')
+            ->name('manage.org.')
+            ->group(function () {
+                Route::get('/', [OrganizationController::class, 'index'])
+                    ->name('index');
+                Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
+                    ->name('delete');
+            });
     });
 
 //BE = Backend or Back Office for admin users
@@ -54,5 +64,5 @@ Route::middleware(['role:companyadmin'])
         Route::post('/{id}', [CompanyAdminProfileController::class, 'update'])
             ->name('update');
         Route::post('/password/{id}', [CompanyAdminProfileController::class, 'updatePassword'])
-            ->name('password');  
+            ->name('password');
     });
