@@ -14,7 +14,7 @@ class SocialMediaFactory extends Factory
 
     const MEDIA_TYPE = [
         'facebook',
-        'x',
+        'x (twitter)',
         'instagram',
         'youtube',
         'linkedin'
