@@ -20,7 +20,24 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+
+        //Use this if you want to create organization accounts
+        $orgAdmin = [
+            'first_name' => $first = fake()->firstName(),
+            // 'last_name' => $last = fake()->lastName(),
+            'email' => 'admin@example.com',
+            'phone' => '(208) 777-1079',
+            'full_name_slug' => Str::slug($first),
+            'address' => '1234 Elm Street Springfield, IL 62704 USA',
+            'role' => 'orgadmin',
+            'unique_ref' => $this->generateUniqueCode(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'remember_token' => Str::random(10),
+        ];
+
+        $companyAdmin = [
             'first_name' => $first = fake()->firstName(),
             'last_name' => $last = fake()->lastName(),
             'email' => 'admin@example.com',
@@ -34,6 +51,7 @@ class UserFactory extends Factory
             'password' => Hash::make('123456'),
             'remember_token' => Str::random(10),
         ];
+        return $companyAdmin;
     }
 
     /**

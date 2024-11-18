@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(SiteSettingSeeder::class);
+        //To make fake orgadmin please use the orgAdmin array of UserFactory
+        //and give multiple values instead of 1
         \App\Models\User::factory(1)->create();
         SocialMediaFactory::seedPredefinedData();
     }
