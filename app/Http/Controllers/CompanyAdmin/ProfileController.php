@@ -25,9 +25,9 @@ class ProfileController extends Controller
     {
         $request->validate(
             [
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'phone' => 'required|string',
+                'first_name' => 'required|min:3',
+                'last_name' => 'nullable|min:3',
+                'phone' => 'nullable',
                 'address' => 'nullable|string',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5121',
             ],

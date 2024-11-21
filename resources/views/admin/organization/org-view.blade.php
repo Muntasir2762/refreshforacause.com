@@ -45,7 +45,7 @@
                                                     <i class="anticon anticon-edit"></i>
                                                 </button>
                                             </div>
-                                            <div>
+                                            {{-- <div>
                                                 <form action="{{ route('manage.org.delete', ['id' => $org->id]) }}"
                                                     method="post">
                                                     @csrf
@@ -56,7 +56,7 @@
                                                         <i class="anticon anticon-delete"></i>
                                                     </button>
                                                 </form>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                     </td>

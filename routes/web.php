@@ -49,8 +49,12 @@ Route::middleware(['role:companyadmin'])
             ->group(function () {
                 Route::get('/', [OrganizationController::class, 'index'])
                     ->name('index');
-                Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
-                    ->name('delete');
+                Route::get('/add', [OrganizationController::class, 'create'])
+                    ->name('add');
+                Route::post('/store', [OrganizationController::class, 'store'])
+                    ->name('store');
+                // Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
+                //     ->name('delete');
             });
     });
 

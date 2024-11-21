@@ -87,25 +87,38 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="first_name">First Name</label>
-                                            <input type="text" name="first_name" id="first_name" class="form-control"
-                                                placeholder="First Name" value="{{ Auth::user()->first_name }}" required>
+                                    @if (Auth::user()->role != 'companyadmin')
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="first_name">Name</label>
+                                                <input type="text" name="first_name" id="first_name" class="form-control"
+                                                    placeholder="Name" value="{{ Auth::user()->first_name }}" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="last_name">Last Name</label>
-                                            <input type="text" name="last_name" id="last_name" class="form-control"
-                                                placeholder="First Name" value="{{ Auth::user()->last_name }}" required>
+                                    @else
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="first_name">First Name</label>
+                                                <input type="text" name="first_name" id="first_name" class="form-control"
+                                                    placeholder="First Name" value="{{ Auth::user()->first_name }}"
+                                                    required>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" name="last_name" id="last_name" class="form-control"
+                                                    placeholder="Last Name" value="{{ Auth::user()->last_name }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                placeholder="Company email" value="{{ Auth::user()->email }}" readonly>
+                                                placeholder="Email" value="{{ Auth::user()->email }}" readonly>
                                             {{-- <small id="helpId" class="text-muted">Help text</small> --}}
                                         </div>
                                     </div>
@@ -113,7 +126,7 @@
                                         <div class="form-group">
                                             <label for="phone">Phone</label>
                                             <input type="tel" name="phone" id="phone" class="form-control"
-                                                placeholder="Company phone" value="{{ Auth::user()->phone }}" required>
+                                                placeholder="Phone" value="{{ Auth::user()->phone }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
