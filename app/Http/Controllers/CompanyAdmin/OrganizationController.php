@@ -37,25 +37,25 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3|max:100',
-            'email' => 'required|email',
+            'name' => 'required|min:3|max:100|unique:users,first_name',
+            'email' => 'required|email|unique:users,email',
             'password' => 'nullable|min:6',
             'phone' => 'nullable',
             'address' => 'nullable'
         ]);
 
-        $user = new User();
+        $org = new User();
 
-        $user->first_name = $request->name;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->address = $request->address;
-        $user->password = $user->password ? Hash::make($user->password) : Hash::make('123456');
-        $user->unique_ref = $this->generateUniqueCode();
-        $user->full_name_slug = Str::slug($request->name);
-        $user->role = 'orgadmin';
+        $org->first_name = $request->name;
+        $org->phone = $request->phone;
+        $org->email = $request->email;
+        $org->address = $request->address;
+        $org->password = $org->password ? Hash::make($org->password) : Hash::make('123456');
+        $org->unique_ref = $this->generateUniqueCode();
+        $org->full_name_slug = Str::slug($request->name);
+        $org->role = 'orgadmin';
 
-        $user->save();
+        $org->save();
 
         return redirect()
             ->route('manage.org.index')
@@ -75,15 +75,40 @@ class OrganizationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $org = User::findOrFail($id);
+        return view('admin.organization.org-edit', compact(['org']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $orgId = $request->id;
+        if (!$orgId) {
+            return back();
+        }
+
+        $org = User::findOrFail($orgId);
+
+        $request->validate([
+            'name' => 'required|min:3|unique:users,first_name,' . $org->id,
+            'email' => 'required|email|unique:users,email,' . $org->id,
+            'password' => 'nullable|min:6',
+            'phone' => 'nullable'
+        ]);
+
+        if ($request->password) {
+            $org->password = Hash::make($request->password);
+        }
+
+        $org->phone = $request->phone;
+        $org->email = $request->email;
+        $org->full_name_slug = Str::slug($request->name);
+
+        $org->save();
+
+        return back()->with($this->successAlert('Successfully Updated!'));
     }
 
     /**

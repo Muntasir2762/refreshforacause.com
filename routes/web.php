@@ -53,6 +53,10 @@ Route::middleware(['role:companyadmin'])
                     ->name('add');
                 Route::post('/store', [OrganizationController::class, 'store'])
                     ->name('store');
+                Route::get('/edit/{id}', [OrganizationController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [OrganizationController::class, 'update'])
+                    ->name('update');
                 // Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
                 //     ->name('delete');
             });

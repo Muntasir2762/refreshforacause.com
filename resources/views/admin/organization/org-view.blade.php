@@ -41,9 +41,10 @@
                                                 </button>
                                             </div>
                                             <div class="mr-1">
-                                                <button class="btn btn-icon btn-hover btn-sm btn-rounded btn-info">
+                                                <a href="{{ route('manage.org.edit', ['id' => $org->id]) }}"
+                                                    class="btn btn-icon btn-hover btn-sm btn-rounded btn-info">
                                                     <i class="anticon anticon-edit"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                             {{-- <div>
                                                 <form action="{{ route('manage.org.delete', ['id' => $org->id]) }}"
