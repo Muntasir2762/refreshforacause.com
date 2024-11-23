@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CompanyAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -76,7 +77,8 @@ class OrganizationController extends Controller
     public function edit(string $id)
     {
         $org = User::findOrFail($id);
-        return view('admin.organization.org-edit', compact(['org']));
+        $statuses = UserStatus::orderBy('name', 'asc')->get();
+        return view('admin.organization.org-edit', compact(['org', 'statuses']));
     }
 
     /**
@@ -95,7 +97,8 @@ class OrganizationController extends Controller
             'name' => 'required|min:3|unique:users,first_name,' . $org->id,
             'email' => 'required|email|unique:users,email,' . $org->id,
             'password' => 'nullable|min:6',
-            'phone' => 'nullable'
+            'phone' => 'nullable',
+            'status' => 'required'
         ]);
 
         if ($request->password) {
@@ -105,6 +108,7 @@ class OrganizationController extends Controller
         $org->phone = $request->phone;
         $org->email = $request->email;
         $org->full_name_slug = Str::slug($request->name);
+        $org->status = $request->status;
 
         $org->save();
 

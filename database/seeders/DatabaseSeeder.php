@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\User;
+// use App\Models\User;
+// use App\Models\UserStatus;
 use Illuminate\Database\Seeder;
 use Database\Factories\SocialMediaFactory;
+use Database\Factories\UserStatusSeederFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         //and give multiple values instead of 1
         \App\Models\User::factory(1)->create();
         SocialMediaFactory::seedPredefinedData();
+        UserStatusSeederFactory::seedPredefinedData();
     }
 }
