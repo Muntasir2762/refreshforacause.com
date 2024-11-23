@@ -24,7 +24,7 @@ class OrgMemberController extends Controller
             ->where('org_id', $orgId)
             ->orderBy('first_name', 'asc')
             ->paginate(15);
-        return view('organization.member.org-member-index', compact(['members']));
+        return view('admin.member.org-member-index', compact(['members']));
     }
 
     /**
@@ -32,7 +32,7 @@ class OrgMemberController extends Controller
      */
     public function create()
     {
-        return view('organization.member.org-member-add');
+        return view('admin.member.org-member-add');
     }
 
     /**
@@ -86,7 +86,7 @@ class OrgMemberController extends Controller
         $member = User::where('id', $id)->where('org_id', $orgId)->firstOrFail();
 
         $statuses = UserStatus::orderBy('name', 'asc')->get();
-        return view('organization.member.org-member-edit', compact(['member', 'statuses']));
+        return view('admin.member.org-member-edit', compact(['member', 'statuses']));
     }
 
     /**
