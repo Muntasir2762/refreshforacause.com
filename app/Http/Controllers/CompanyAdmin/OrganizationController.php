@@ -105,6 +105,7 @@ class OrganizationController extends Controller
             $org->password = Hash::make($request->password);
         }
 
+        $org->first_name = $request->name;
         $org->phone = $request->phone;
         $org->email = $request->email;
         $org->full_name_slug = Str::slug($request->name);

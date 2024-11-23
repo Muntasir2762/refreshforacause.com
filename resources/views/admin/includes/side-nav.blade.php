@@ -19,7 +19,7 @@
                         <span class="icon-holder">
                             <i class="anticon anticon-deployment-unit"></i>
                         </span>
-                        <span class="title">Organization</span>
+                        <span class="title">Organizations</span>
                         <span class="arrow">
                             <i class="arrow-icon"></i>
                         </span>
@@ -30,6 +30,29 @@
                         </li>
                         <li>
                             <a href="{{ route('manage.org.add') }}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
+
+            @if (Auth::user()->role == 'orgadmin')
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-deployment-unit"></i>
+                        </span>
+                        <span class="title">Members</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('manage.member.index') }}">View All</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.member.add') }}">Add New</a>
                         </li>
                     </ul>
                 </li>

@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\CompanyAdmin\OrganizationController;
-use App\Http\Controllers\CompanyAdmin\ProfileController as CompanyAdminProfileController;
+use App\Http\Controllers\CompanyAdmin\ProfileController as BackOfficeProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\OrgMemberController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,10 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Dashboard
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+//Profile Route for BE(Backend or Back Office) users
+Route::prefix('profile')
+    ->name('be.profile.')
+    ->middleware(['role:companyadmin,orgadmin,orgmember'])
+    ->group(function () {
+        Route::get('/', [BackOfficeProfileController::class, 'index'])
+            ->name('index');
+        Route::post('/{id}', [BackOfficeProfileController::class, 'update'])
+            ->name('update');
+        Route::post('/password/{id}', [BackOfficeProfileController::class, 'updatePassword'])
+            ->name('password');
+    });
+
+
+//Company Admin Middlreware group routes
 Route::middleware(['role:companyadmin'])
     ->group(function () {
         Route::prefix('site-settings')
@@ -56,16 +73,21 @@ Route::middleware(['role:companyadmin'])
             });
     });
 
-//BE = Backend or Back Office for admin users
-Route::middleware(['role:companyadmin'])
-    ->prefix('profile')
-    ->name('be.profile.')
-    ->middleware(['auth'])
+//Organization Admin Middlreware group routes
+Route::middleware(['role:orgadmin'])
     ->group(function () {
-        Route::get('/', [CompanyAdminProfileController::class, 'index'])
-            ->name('index');
-        Route::post('/{id}', [CompanyAdminProfileController::class, 'update'])
-            ->name('update');
-        Route::post('/password/{id}', [CompanyAdminProfileController::class, 'updatePassword'])
-            ->name('password');
+        Route::prefix('manage-member')
+            ->name('manage.member.')
+            ->group(function () {
+                Route::get('/', [OrgMemberController::class, 'index'])
+                    ->name('index');
+                Route::get('/add', [OrgMemberController::class, 'create'])
+                    ->name('add');
+                Route::post('/store', [OrgMemberController::class, 'store'])
+                    ->name('store');
+                Route::get('/edit/{id}', [OrgMemberController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [OrgMemberController::class, 'update'])
+                    ->name('update');
+            });
     });
