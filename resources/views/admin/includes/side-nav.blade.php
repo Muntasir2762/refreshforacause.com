@@ -33,6 +33,15 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="{{ route('manage.users.index') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-team"></i>
+                        </span>
+                        <span class="title">Manage Users</span>
+                    </a>
+                </li>
             @endif
 
 

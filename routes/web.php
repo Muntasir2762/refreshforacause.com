@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\OrgMemberController;
+use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -70,6 +71,17 @@ Route::middleware(['role:companyadmin'])
                     ->name('update');
                 // Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
                 //     ->name('delete');
+            });
+
+        Route::prefix('manage-users')
+            ->name('manage.users.')
+            ->group(function () {
+                Route::get('/', [SurfaceUserController::class, 'index'])
+                    ->name('index');
+                Route::get('/edit/{id}', [SurfaceUserController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [SurfaceUserController::class, 'update'])
+                    ->name('update');
             });
     });
 
