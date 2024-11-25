@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\OrgMemberController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,19 @@ Route::middleware(['role:companyadmin'])
                 Route::get('/edit/{id}', [SurfaceUserController::class, 'edit'])
                     ->name('edit');
                 Route::post('/update/{id}', [SurfaceUserController::class, 'update'])
+                    ->name('update');
+            });
+
+        Route::prefix('manage-categories')
+            ->name('manage.categories.')
+            ->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])
+                    ->name('index');
+                Route::post('/store', [CategoryController::class, 'store'])
+                    ->name('store');
+                Route::get('/edit/{id}', [CategoryController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [CategoryController::class, 'update'])
                     ->name('update');
             });
     });

@@ -8,6 +8,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Factories\SocialMediaFactory;
 use Database\Factories\UserStatusSeederFactory;
+use Database\Factories\CategoryFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,11 +24,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(SiteSettingSeeder::class);
+        // $this->call(SiteSettingSeeder::class);
+
         //To make fake orgadmin please use the orgAdmin array of UserFactory
         //and give multiple values instead of 1
-        \App\Models\User::factory(1)->create();
-        SocialMediaFactory::seedPredefinedData();
-        UserStatusSeederFactory::seedPredefinedData();
+        // \App\Models\User::factory(1)->create();
+        // SocialMediaFactory::seedPredefinedData();
+        // UserStatusSeederFactory::seedPredefinedData();
+        // CategoryFactory::seedPredefinedData();
     }
 }
