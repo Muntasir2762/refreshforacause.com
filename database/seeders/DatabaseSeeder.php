@@ -8,7 +8,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Factories\SocialMediaFactory;
 use Database\Factories\UserStatusSeederFactory;
-use Database\Factories\CategoryFactory;
+use Database\Factories\CategoryFactory as CategoryStatusFactory;
+use Database\Factories\ProductStatusFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(1)->create();
         // SocialMediaFactory::seedPredefinedData();
         // UserStatusSeederFactory::seedPredefinedData();
-        // CategoryFactory::seedPredefinedData();
+        // CategoryStatusFactory::seedPredefinedData();
+        //ProductStatusFactory::seedPredefinedData();
     }
 }
