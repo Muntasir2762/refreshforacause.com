@@ -37,6 +37,6 @@ class DatabaseSeeder extends Seeder
         // UserStatusSeederFactory::seedPredefinedData();
         // CategoryStatusFactory::seedPredefinedData();
         //ProductStatusFactory::seedPredefinedData();
-        ProductSizeFactory::seedPredefinedData();
+        //ProductSizeFactory::seedPredefinedData();
     }
 }
