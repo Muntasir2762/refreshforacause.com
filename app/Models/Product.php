@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const THUMBNAIL_IMAGE_DIR = 'images/product/thumbnail/';
+
     protected $fillable = [
         'sku_id',
         'title',
@@ -35,5 +37,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 }
