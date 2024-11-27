@@ -7,6 +7,7 @@ use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\OrgMemberController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyAdmin\ProductController;
 use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -96,6 +97,23 @@ Route::middleware(['role:companyadmin'])
                     ->name('edit');
                 Route::post('/update/{id}', [CategoryController::class, 'update'])
                     ->name('update');
+            });
+
+        Route::prefix('manage-products')
+            ->name('manage.products.')
+            ->group(function () {
+                Route::get('/', [ProductController::class, 'index'])
+                    ->name('index');
+                Route::get('/add', [ProductController::class, 'create'])
+                    ->name('add');
+                Route::post('/store', [ProductController::class, 'store'])
+                    ->name('store');
+                Route::get('/edit/{id}', [ProductController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [ProductController::class, 'update'])
+                    ->name('update');
+                Route::get('/details/{id}', [ProductController::class, 'show'])
+                    ->name('details');
             });
     });
 
