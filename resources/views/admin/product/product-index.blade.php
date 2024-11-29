@@ -17,6 +17,7 @@
                             <tr role="row">
                                 <th>#ID</th>
                                 <th>SKU</th>
+                                <th>Thumbnail</th>
                                 <th>Title</th>
                                 <th>Status</th>
                                 <th class="text-right">Action</th>

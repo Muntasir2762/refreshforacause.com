@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('capacity')->nullable();
             $table->string('manufacturer')->nullable();
             $table->string('status')->nullable()->default('live');
-            $table->text('thumbnail')->nullable();
+            $table->text('thumb_large')->nullable();
+            $table->text('thumb_small')->nullable();
             $table->string('trend_type')->nullable()->comment('new, hot, sale');
             $table->boolean('is_featured')->nullable()->default(false);
             $table->unsignedBigInteger('category_id')->nullable()->default(null);
