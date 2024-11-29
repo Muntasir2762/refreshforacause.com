@@ -10,7 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const THUMBNAIL_IMAGE_DIR = 'images/product/thumbnail/';
+    const THUMB_LARGE_IMAGE_DIR = 'images/product/thumbnail/large/';
+    const THUMB_SMALL_IMAGE_DIR = 'images/product/thumbnail/small/';
 
     protected $fillable = [
         'sku_id',
@@ -28,7 +29,8 @@ class Product extends Model
         'capacity',
         'manufacturer',
         'status',
-        'thumbnail',
+        'thumb_small',
+        'thumb_large',
         'trend_type',
         'is_featured',
         'category_id'
