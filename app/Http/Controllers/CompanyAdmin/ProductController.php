@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\CompanyAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\ProductSize;
+use App\Models\ProductStatus;
+use App\Models\ProductTrendType;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -20,7 +24,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.product-add');
+        $productStatuses = ProductStatus::orderBy('name', 'asc')->get();
+        $productTrendTypes = ProductTrendType::orderBy('trend', 'asc')->get();
+        $productSizes = ProductSize::orderBy('size', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('admin.product.product-add', compact([
+            'productStatuses',
+            'productTrendTypes',
+            'categories',
+            'productSizes'
+        ]));
     }
 
     /**

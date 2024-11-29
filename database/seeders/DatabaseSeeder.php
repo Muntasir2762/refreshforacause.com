@@ -13,6 +13,7 @@ use Database\Factories\UserStatusSeederFactory;
 use Database\Factories\CategoryFactory as CategoryStatusFactory;
 use Database\Factories\ProductSizeFactory;
 use Database\Factories\ProductStatusFactory;
+use Database\Factories\ProductTrendTypeFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,5 +39,6 @@ class DatabaseSeeder extends Seeder
         // CategoryStatusFactory::seedPredefinedData();
         //ProductStatusFactory::seedPredefinedData();
         //ProductSizeFactory::seedPredefinedData();
+        //ProductTrendTypeFactory::seedPredefinedData();
     }
 }
