@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">Category <sup class="text-danger">*</sup></label>
-                                    <select class="form-control" name="category" id="category" required>
+                                    <select class="form-control" name="category_id" id="category" required>
                                         <option value="">--SELECT--</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="price">Price <sup class="text-danger">*</sup></label>
+                                    <label for="price">Price ($)<sup class="text-danger">*</sup></label>
                                     <input type="number" min="1" step="0.1" name="price" id="price"
                                         class="form-control" placeholder="Price" value="{{ old('price') }}" required>
                                 </div>
@@ -83,6 +83,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="material">Material</label>
@@ -102,6 +103,51 @@
                                     <label for="capacity">Capacity</label>
                                     <input type="text" name="capacity" id="capacity" class="form-control"
                                         placeholder="Capacity" value="{{ old('capacity') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="status">Status <sup class="text-danger">*</sup></label>
+                                    <select class="form-control" name="status" id="status">
+                                        <option value="">--SELECT--</option>
+                                        @foreach ($productStatuses as $status)
+                                            <option value="{{ $status->name }}">{{ ucwords($status->name) }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="trend_type">Trend Type</label>
+                                    <select class="form-control" name="trend_type" id="trend_type">
+                                        <option value="">--SELECT--</option>
+                                        @foreach ($productTrendTypes as $trend_type)
+                                            <option value="{{ $trend_type->trend }}">{{ ucwords($trend_type->trend) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="checkbox mt-4">
+                                        <input id="featured" name="is_featured" type="checkbox">
+                                        <label for="featured">Featured</label>
+                                    </div>
+                                    <small class="text-muted">Check to make the product featured</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Thumbnail Image <sup class="text-danger">*</sup></label>
+                                    <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
+                                    <small class="text-muted">Maximum size is 5Mb</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" name="description" rows="5">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
