@@ -141,7 +141,7 @@
                                 <div class="form-group">
                                     <label for="thumbnail">Thumbnail Image <sup class="text-danger">*</sup></label>
                                     <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
-                                    <small class="text-muted">Maximum size is 5Mb</small>
+                                    <small class="text-muted">Maximum size is 2Mb</small>
                                 </div>
                             </div>
                             <div class="col-md-12">

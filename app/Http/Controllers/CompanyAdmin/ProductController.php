@@ -69,10 +69,10 @@ class ProductController extends Controller
                 'trend_type' => 'nullable',
                 'is_featured' => 'nullable',
                 'description' => 'nullable',
-                'thumbnail' => 'required|image|mimes:png,jpg,jpeg|min:1|max:5121'
+                'thumbnail' => 'required|image|mimes:png,jpg,jpeg|min:1|max:2049'
             ],
             [
-                'thumbnail.max' => 'Thumbnail cannot be more than 5Mb'
+                'thumbnail.max' => 'Thumbnail cannot be more than 2Mb'
             ]
         );
 
@@ -182,10 +182,10 @@ class ProductController extends Controller
                 'trend_type' => 'nullable',
                 'is_featured' => 'nullable',
                 'description' => 'nullable',
-                'thumbnail' => 'image|mimes:png,jpg,jpeg|min:1|max:5121'
+                'thumbnail' => 'image|mimes:png,jpg,jpeg|min:1|max:2049'
             ],
             [
-                'thumbnail.max' => 'Thumbnail cannot be more than 5Mb'
+                'thumbnail.max' => 'Thumbnail cannot be more than 2Mb'
             ]
         );
 

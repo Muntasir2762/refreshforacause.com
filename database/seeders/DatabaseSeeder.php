@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(1)->create();
         // SocialMediaFactory::seedPredefinedData();
         // UserStatusSeederFactory::seedPredefinedData();
-        // CategoryStatusFactory::seedPredefinedData();
+        CategoryStatusFactory::seedPredefinedData();
         //ProductStatusFactory::seedPredefinedData();
         //ProductSizeFactory::seedPredefinedData();
         //ProductTrendTypeFactory::seedPredefinedData();
