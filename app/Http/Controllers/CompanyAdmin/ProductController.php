@@ -108,14 +108,13 @@ class ProductController extends Controller
             $smallThumbDir = Product::THUMB_SMALL_IMAGE_DIR;
             $thumbnailName = $this->generateFileName($fileName, $fileExtension);
 
-
             try {
                 Image::make($reqFile)
                     ->resize(760, 600)
                     ->save($larageThumbDir .  $thumbnailName);
 
                 Image::make($reqFile)
-                    ->resize(80, 80)
+                    ->resize(70, 70)
                     ->save($smallThumbDir .  $thumbnailName);
             } catch (Exception $e) {
                 return back()->with($this->errorAlert('Failed to upload!'));
