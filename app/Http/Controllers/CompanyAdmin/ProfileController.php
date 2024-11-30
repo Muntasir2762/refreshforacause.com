@@ -43,18 +43,12 @@ class ProfileController extends Controller
         $profile = User::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($profile->image && file_exists($profile->image)) {
-                unlink($profile->image);
-            }
-            if ($profile->avatar_image && file_exists($profile->avatar_image)) {
-                unlink($profile->avatar_image);
-            }
             $reqFile = $request->file('image');
-            $profileName = 'image';
-            $avatarName = 'avatar';
+            $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
             $fileExtension = strtolower($reqFile->getClientOriginalExtension());
-            $newProfileImgName = $profileName . '.' . $fileExtension;
-            $newAvatarImgName = $avatarName . '.' . $fileExtension;
+            $profileImageName = $this->generateFileName($fileName, $fileExtension);
+            $fileExtension = strtolower($reqFile->getClientOriginalExtension());
+            $newProfileImgName = $newAvatarImgName = $profileImageName;
             $profileDir = User::PROFILE_IMAGE_DIR;
             $avatarDir = User::AVATAR_IMAGE_DIR;
             try {
@@ -65,6 +59,13 @@ class ProfileController extends Controller
                 Image::make($reqFile)
                     ->resize(40, 40)
                     ->save($avatarDir . $newAvatarImgName);
+
+                if ($profile->image && file_exists($profile->image)) {
+                    unlink($profile->image);
+                }
+                if ($profile->avatar_image && file_exists($profile->avatar_image)) {
+                    unlink($profile->avatar_image);
+                }
             } catch (Exception $e) {
                 return back()->with($this->errorAlert('Failed to upload!'));
             }
