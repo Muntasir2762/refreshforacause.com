@@ -34,6 +34,11 @@ class BannerImageController extends Controller
         ]);
 
         $bannerImage = new BannerImage();
+        $totalBannerImages = BannerImage::count();
+
+        if ($totalBannerImages >= 10) {
+            return back()->with($this->errorAlert('You cannot add more than 10 banners for your website, please delete older banners to upload new ones'));
+        }
 
         if ($request->hasFile('image')) {
             $reqFile = $request->file('image');
