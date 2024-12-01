@@ -10,6 +10,8 @@ class BannerImage extends Model
 {
     use HasFactory;
 
+    const IMAGE_DIR = 'images/banner/';
+
     protected $fillable = [
         'image',
         'header',
