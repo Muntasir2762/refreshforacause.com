@@ -15,6 +15,14 @@
 
             @if (Auth::user()->role == 'companyadmin')
                 <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="{{ route('manage.banners.index') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-pic-center"></i>
+                        </span>
+                        <span class="title">Manage Banners</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
                             <i class="anticon anticon-deployment-unit"></i>
