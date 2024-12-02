@@ -147,3 +147,8 @@ Route::middleware(['role:orgadmin'])
                     ->name('update');
             });
     });
+
+
+Route::get('/ecom', function () {
+    return view('frontend.index');
+});
