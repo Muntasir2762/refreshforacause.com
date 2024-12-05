@@ -45,4 +45,9 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    public function surfaceUserCreate(): View
+    {
+        return view('frontend.pages.fe-login');
+    }
 }

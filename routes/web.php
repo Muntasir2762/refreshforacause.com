@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CompanyAdmin\OrganizationController;
 use App\Http\Controllers\CompanyAdmin\ProfileController as BackOfficeProfileController;
 use App\Http\Controllers\ProfileController;
@@ -10,14 +12,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyAdmin\BannerImageController;
 use App\Http\Controllers\CompanyAdmin\ProductController;
 use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use Illuminate\Support\Facades\Route;
-
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //Dashboard
 Route::get('/dashboard', function () {
@@ -149,6 +149,27 @@ Route::middleware(['role:orgadmin'])
     });
 
 
-Route::get('/ecom', function () {
-    return view('frontend.index');
-});
+
+
+//FE ECOM route group
+
+Route::prefix('/')
+    ->name('frontend.')
+    ->group(function () {
+
+        Route::get('', [HomeController::class, 'index'])->name('index');
+
+        Route::prefix('user')
+            ->name('users.')
+            ->group(function () {
+                Route::get('/sign-in', [AuthenticatedSessionController::class, 'surfaceUserCreate'])->name('login');
+
+                Route::get('/sign-up', [RegisteredUserController::class, 'surfaceUserRegister'])->name('register');
+            });
+
+        Route::prefix('store/products')
+            ->name('products.')
+            ->group(function () {
+                Route::get('/details', [FrontendProductController::class, 'show'])->name('details');
+            });
+    });

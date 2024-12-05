@@ -17,44 +17,38 @@
                 <div class="footer-links">
                     <div class="row">
                         <div class="col-md-2">
-                            <h5>Browse by</h5>
+                            <h5>Demo Links</h5>
                             <ul>
-                                <li><a href="#">Brand</a></li>
-                                <li><a href="#">Product</a></li>
-                                <li><a href="#">Category</a></li>
-                                <li><a href="#">Projects</a></li>
-                                <li><a href="#">Sales</a></li>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
                             </ul>
                         </div>
                         <div class="col-md-2">
-                            <h5>Quick links</h5>
+                            <h5>Demo Links</h5>
                             <ul>
-                                <li><a href="#">In-Store Pickup</a></li>
-                                <li><a href="#">Gift Cards</a></li>
-                                <li><a href="#">Afterpay</a></li>
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
                             </ul>
                         </div>
                         <div class="col-md-2">
-                            <h5>Order info</h5>
+                            <h5>Demo Links</h5>
                             <ul>
-                                <li><a href="#">Order Status </a></li>
-                                <li><a href="#">Payments</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Order history</a></li>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
                             </ul>
                         </div>
                         <div class="offset-md-3 col-md-3">
-                            <h5>Sign up for our newsletter</h5>
-                            <p><i>Add your email address to sign up for our monthly emails and to receive
-                                    promotional offers.</i></p>
-                            <div class="form-group form-newsletter">
+                            <h5>About Us</h5>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vitae vel eos quasi illum
+                                voluptatem exercitationem facere? Ullam repudiandae similique sit labore repellendus
+                                voluptate saepe. Voluptatibus quam ratione libero illum?
+                            </p>
+                            {{-- <div class="form-group form-newsletter">
                                 <input class="form-control" type="text" name="email" value=""
                                     placeholder="Email address" />
                                 <input type="submit" class="btn btn-secondary btn-sm" value="Subscribe" />
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -68,7 +62,6 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="#"><i class="fa fa-youtube"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
