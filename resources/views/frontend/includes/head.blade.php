@@ -22,6 +22,8 @@
 <link rel="stylesheet" media="all" href="{{ asset('frontend/css/linear-icons.css') }}" />
 <link rel="stylesheet" media="all" href="{{ asset('frontend/css/magnific-popup.css') }}" />
 <link rel="stylesheet" media="all" href="{{ asset('frontend/css/owl.carousel.css') }}" />
+<link href="{{ asset('frontend/vendors/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('frontend/vendors/toastr/css/toastr.css') }}">
 <link rel="stylesheet" media="all" href="{{ asset('frontend/css/theme.css') }}" />
 
 <!--Google fonts-->
