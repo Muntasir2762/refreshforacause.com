@@ -14,7 +14,6 @@
     @yield('pluginScript')
 
     <script>
-        toastr.success("hello")
         @if (session('alert'))
             @if (session('alert')['type'] == 'success')
                 toastr.success("{{ session('alert')['msg'] }}")

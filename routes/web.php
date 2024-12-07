@@ -170,6 +170,12 @@ Route::prefix('/')
         Route::prefix('store/products')
             ->name('products.')
             ->group(function () {
+                //This route should have a slug of the product + id
+                //Example URI store/products/details/my-bottle/100
                 Route::get('/details', [FrontendProductController::class, 'show'])->name('details');
+                //This route should have a slug of the product category e.g. bottle
+                //Example URI store/products/bottle
+                Route::get('/', [FrontendProductController::class, 'index'])
+                    ->name('all');
             });
     });
