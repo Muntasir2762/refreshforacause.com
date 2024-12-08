@@ -71,24 +71,24 @@
                                         <i class="icon icon-heart"></i>
                                     </a>
                                 </span> --}}
-                                <span>
+                                {{-- <span>
                                     <a href="#productid1" class="mfp-open" data-title="Quick wiew">
                                         <i class="icon icon-eye"></i>
                                     </a>
-                                </span>
+                                </span> --}}
                             </div>
                             <div class="btn btn-add">
                                 <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="product.html">
+                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="product.html">{{ $product->title }}</a>
+                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
                                     <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
@@ -144,24 +144,24 @@
                                             <i class="icon icon-heart"></i>
                                         </a>
                                     </span> --}}
-                                <span>
+                                {{-- <span>
                                     <a href="#productid1" class="mfp-open" data-title="Quick wiew">
                                         <i class="icon icon-eye"></i>
                                     </a>
-                                </span>
+                                </span> --}}
                             </div>
                             <div class="btn btn-add">
                                 <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="product.html">
+                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="product.html">{{ $product->title }}</a>
+                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
                                     <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
@@ -217,24 +217,24 @@
                                             <i class="icon icon-heart"></i>
                                         </a>
                                     </span> --}}
-                                <span>
+                                {{-- <span>
                                     <a href="#productid1" class="mfp-open" data-title="Quick wiew">
                                         <i class="icon icon-eye"></i>
                                     </a>
-                                </span>
+                                </span> --}}
                             </div>
                             <div class="btn btn-add">
                                 <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="product.html">
+                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="product.html">{{ $product->title }}</a>
+                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
                                     <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
@@ -290,24 +290,24 @@
                                             <i class="icon icon-heart"></i>
                                         </a>
                                     </span> --}}
-                                <span>
+                                {{-- <span>
                                     <a href="#productid1" class="mfp-open" data-title="Quick wiew">
                                         <i class="icon icon-eye"></i>
                                     </a>
-                                </span>
+                                </span> --}}
                             </div>
                             <div class="btn btn-add">
                                 <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="product.html">
+                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="product.html">{{ $product->title }}</a>
+                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
                                     <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>

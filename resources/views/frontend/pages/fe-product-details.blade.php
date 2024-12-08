@@ -11,12 +11,12 @@
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    <li class="breadcrumb-item"><a href="#">Product-Details</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$singleProduct->title}}</li>
                 </ol>
-                <h2 class="title">Mellany Sofa</h2>
+                <h2 class="title">{{$singleProduct->title}}</h2>
                 <div class="text">
-                    <p>Nam egestas tincidunt turpis</p>
+                    <p>{{$singleProduct->sku_id}}</p>
                 </div>
             </div>
         </header>
@@ -34,8 +34,8 @@
 
                                 <div class="price">
                                     <span class="h3">
-                                        $ 1999,00
-                                        <small>$ 2999,00</small>
+                                        $ {{ $singleProduct->price - $singleProduct->price * ($singleProduct->discount_amount / 100) }}
+                                        <small>$ {{ $singleProduct->price }}</small>
                                     </span>
                                 </div>
 
@@ -45,14 +45,14 @@
 
                                 <div class="info-box">
                                     <span><strong>Maifacturer</strong></span>
-                                    <span>Brand name</span>
+                                    <span>Refreshforacause</span>
                                 </div>
 
                                 <!--info-box-->
 
                                 <div class="info-box">
                                     <span><strong>Materials</strong></span>
-                                    <span>Wood, Leather, Acrylic</span>
+                                    <span>{{$singleProduct->material}}</span>
                                 </div>
 
                                 <hr />
@@ -61,13 +61,17 @@
                                 <!--info-box-->
 
                                 <div class="info-box">
-                                    <span><strong>Available Colors</strong></span>
+                                    {{-- <span><strong>Available Colors</strong></span>
                                     <div class="product-colors clearfix">
                                         <span class="color-btn color-btn-red"></span>
                                         <span class="color-btn color-btn-blue checked"></span>
                                         <span class="color-btn color-btn-green"></span>
                                         <span class="color-btn color-btn-gray"></span>
                                         <span class="color-btn color-btn-biege"></span>
+                                    </div> --}}
+                                    <span><strong>Color</strong></span>
+                                    <div class="product-colors clearfix">
+                                        <span class="">{{$singleProduct->color}}</span>
                                     </div>
                                 </div>
 
@@ -76,7 +80,7 @@
                                 <!--info-box-->
 
                                 <div class="info-box">
-                                    <span><strong>Choose size</strong></span>
+                                    {{-- <span><strong>Choose size</strong></span>
                                     <div class="product-colors clearfix">
                                         <span class="color-btn color-btn-biege">
                                             <span class="product-size" data-text="">S</span>
@@ -84,6 +88,10 @@
                                         <span class="color-btn color-btn-biege checked">M</span>
                                         <span class="color-btn color-btn-biege">XL</span>
                                         <span class="color-btn color-btn-biege">XXL</span>
+                                    </div> --}}
+                                    <span><strong>Size</strong></span>
+                                    <div class="product-colors clearfix">
+                                        <span class="">{{$singleProduct->size}}</span>
                                     </div>
                                 </div>
 
@@ -94,14 +102,17 @@
                                         Quantity
                                     </span>
                                     <span>
-                                        <span class="row">
-                                            <span class="col-6">
-                                                <input type="number" value="1" class="form-control">
+                                        <form action="" method="">
+                                            @csrf
+                                            <span class="row">
+                                                <span class="col-6">
+                                                    <input type="number" name="" value="1" min="1" class="form-control">
+                                                </span>
+                                                <span class="col-6">
+                                                    <button type="submit" class="btn btn-danger">Buy now</button>
+                                                </span>
                                             </span>
-                                            <span class="col-6">
-                                                <a href="#" class="btn btn-danger">Buy now</a>
-                                            </span>
-                                        </span>
+                                        </form>
                                     </span>
                                 </div>
 
@@ -109,15 +120,21 @@
 
                                 <div class="info-box">
                                     <span>
-                                        <small>*** We progress your order for shipping as soon as possible. Please note that
-                                            after your order has been received, we can not change the delivery address.
-                                            Control your address details in any case before placing your order!</small>
+                                        <small>
+                                            {{$singleProduct->description}}
+                                        </small>
                                     </span>
                                 </div>
 
                                 <hr />
 
                                 <div class="info-box info-box-addto added">
+                                    <span>
+                                        <a href="#"><i class="added"><i class="icon icon-cart"></i> Add to Cart</i></a>
+                                    </span>
+                                </div>
+
+                                {{-- <div class="info-box info-box-addto added">
                                     <span>
                                         <i class="add"><i class="fa fa-heart-o"></i> Add to favorites</i>
                                         <i class="added"><i class="fa fa-heart"></i> Remove from favorites</i>
@@ -136,7 +153,7 @@
                                         <i class="add"><i class="fa fa-star-o"></i> Add to Collection</i>
                                         <i class="added"><i class="fa fa-star"></i> Remove from Collection</i>
                                     </span>
-                                </div>
+                                </div> --}}
 
                             </div> <!--/clearfix-->
                         </div> <!--/product-info-wrapper-->
@@ -148,10 +165,11 @@
                         <!--product gallery-->
 
                         <div class="owl-product-gallery owl-carousel owl-theme open-popup-gallery">
-                            <a href="assets/images/product-10.jpg"><img
-                                    src="{{ asset('frontend/assets/images/product-10.jpg') }}" alt="" /></a>
-                            <a href="assets/images/product-9.jpg"><img
-                                    src="{{ asset('frontend/assets/images/product-9.jpg') }}" alt="" /></a>
+                            @for ($i = 0; $i<=0; $i++)
+                                <a href="/{{$singleProduct->thumb_large}}">
+                                    <img src="{{ asset($singleProduct->thumb_large) }}" alt="{{$singleProduct->title}}" />
+                                </a>
+                            @endfor
                         </div>
                     </div>
 
