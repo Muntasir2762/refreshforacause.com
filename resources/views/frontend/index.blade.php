@@ -13,23 +13,28 @@
 
                 <!--Slide item-->
 
-                <div class="item d-flex align-items-center"
-                    style="background-image:url({{ asset('frontend/assets/images/slide-1.jpg') }});">
-                    <div class="container">
-                        <div class="caption">
-                            <div class="animated" data-start="fadeInUp">
-                                <div class="promo pt-3">
-                                    <div class="title title-sm p-0">Sofa Grace</div>
+                @foreach ($bannerImages as $bannerImage)
+                    <div class="item d-flex align-items-center" style="background-image:url({{ asset($bannerImage->image) }});">
+                        <div class="container">
+                            <div class="caption">
+                                <div class="animated" data-start="fadeInUp">
+                                    <div class="promo pt-3">
+                                        <div class="title title-sm p-0">Welcome to Refresh for a Cause!</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="animated" data-start="fadeInUp">
-                                Score new arrivals from latest items
-                                <br />
-                                Multipurpose eCommerce template ready
+                                {{-- <div class="animated" data-start="fadeInUp">
+                                    We're more than just fundraising - we're parents who saw a need for a better,<br>
+                                    more practical way to help organizations raise money.<br>
+                                    Tired of the usual fundraisers,<br>
+                                    we wanted something that's not only easy but also offers lasting value.<br>
+                                    That's why we created Refresh for a Cause, a simple, effective way<br>
+                                    to raise funds through water bottle and tumbler sales that everyone can use and
+                                    appreciate.
+                                </div> --}}
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
 
             </div> <!--/owl-slider-->
@@ -82,13 +87,15 @@
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                    <a
+                                        href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
+                                        <a
+                                            href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
                                     <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
@@ -155,16 +162,19 @@
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                    <a
+                                        href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
+                                        <a
+                                            href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
-                                    <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
+                                    <sup>$
+                                        {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
                                     <span class="description clearfix">
                                         Gubergren amet dolor ea diam takimata consetetur facilisis blandit et aliquyam
                                         lorem ea duo labore diam sit et consetetur nulla
@@ -228,16 +238,19 @@
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                    <a
+                                        href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
+                                        <a
+                                            href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
-                                    <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
+                                    <sup>$
+                                        {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
                                     <span class="description clearfix">
                                         Gubergren amet dolor ea diam takimata consetetur facilisis blandit et aliquyam
                                         lorem ea duo labore diam sit et consetetur nulla
@@ -301,16 +314,19 @@
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
-                                    <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                    <a
+                                        href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                         <img src="{{ asset($product->thumb_small) }}" alt="{{ $product->title }}" />
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h2 class="title h4">
-                                        <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
+                                        <a
+                                            href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $product->title }}</a>
                                     </h2>
                                     <sub>$ {{ $product->price }}</sub>
-                                    <sup>$ {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
+                                    <sup>$
+                                        {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
                                     <span class="description clearfix">
                                         Gubergren amet dolor ea diam takimata consetetur facilisis blandit et aliquyam
                                         lorem ea duo labore diam sit et consetetur nulla
