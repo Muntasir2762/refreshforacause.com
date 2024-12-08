@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyAdmin\BannerImageController;
 use App\Http\Controllers\CompanyAdmin\ProductController;
 use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
+use App\Http\Controllers\CompanyAdmin\TrackingScriptController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,17 @@ Route::middleware(['role:companyadmin'])
                     ->name('index');
                 Route::post('/bulk-update', [SocialMediaController::class, 'update'])
                     ->name('bulk.update');
+            });
+
+        Route::prefix('tracking-script')
+            ->name('tracking-script.')
+            ->group(function () {
+                Route::get('/', [TrackingScriptController::class, 'index'])
+                    ->name('index');
+                Route::post('/edit/{id}', [TrackingScriptController::class, 'edit'])
+                    ->name('edit');    
+                Route::post('/update/{id}', [TrackingScriptController::class, 'update'])
+                    ->name('update');
             });
 
         Route::prefix('manage-org')

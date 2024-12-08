@@ -85,6 +85,15 @@
 
                             </div>
                         </a>
+                        <a href="{{ route('tracking-script.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="anticon opacity-04 font-size-16 anticon-global"></i>
+                                    <span class="m-l-10">Tracking Script</span>
+                                </div>
+
+                            </div>
+                        </a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}" id='logoutForm'>
                         @csrf
