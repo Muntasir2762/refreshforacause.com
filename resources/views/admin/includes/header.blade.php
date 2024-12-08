@@ -88,7 +88,7 @@
                         <a href="{{ route('tracking-script.index') }}" class="dropdown-item d-block p-h-15 p-v-10">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
-                                    <i class="anticon opacity-04 font-size-16 anticon-global"></i>
+                                    <i class="anticon opacity-04 font-size-16 anticon-code"></i>
                                     <span class="m-l-10">Tracking Script</span>
                                 </div>
 

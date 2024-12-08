@@ -65,10 +65,10 @@ Route::middleware(['role:companyadmin'])
             ->group(function () {
                 Route::get('/', [TrackingScriptController::class, 'index'])
                     ->name('index');
-                Route::post('/edit/{id}', [TrackingScriptController::class, 'edit'])
-                    ->name('edit');    
-                Route::post('/update/{id}', [TrackingScriptController::class, 'update'])
-                    ->name('update');
+                Route::post('/store', [TrackingScriptController::class, 'store'])
+                    ->name('store');
+                Route::delete('/delete/{id}', [TrackingScriptController::class, 'destroy'])
+                    ->name('delete');
             });
 
         Route::prefix('manage-org')
