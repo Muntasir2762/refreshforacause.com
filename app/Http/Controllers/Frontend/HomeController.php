@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $hotProducts = Product::orderBy('id', 'desc')->where('trend_type', 'hot')->where('status', 'in stock')->get();
+        $newProducts = Product::orderBy('id', 'desc')->where('trend_type', 'new')->where('status', 'in stock')->get();
+        $saleProducts = Product::orderBy('id', 'desc')->where('trend_type', 'sale')->where('status', 'in stock')->get();
+        $featuredProducts = Product::orderBy('id', 'desc')->where('is_featured', 1)->where('status', 'in stock')->get();
+        return view('frontend.index', compact('hotProducts', 'newProducts', 'saleProducts', 'featuredProducts'));
     }
 
     /**
