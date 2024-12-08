@@ -54,4 +54,9 @@ class RegisteredUserController extends Controller
                 $this->successAlert('Registered Successfully, use your credentials to login')
             );
     }
+
+    public function surfaceUserRegister(): View
+    {
+        return view('frontend.pages.fe-register');
+    }
 }
