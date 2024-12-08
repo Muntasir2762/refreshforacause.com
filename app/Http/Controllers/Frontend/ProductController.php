@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -34,9 +35,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(Request $request, string $id, string $slug)
     {
-        return view('frontend.pages.fe-product-details');
+        $singleProduct = Product::where('id', $id)->where('slug', $slug)->first();
+        return view('frontend.pages.fe-product-details', compact('singleProduct'));
     }
 
     /**
