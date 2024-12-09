@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Traits\AlertTrait;
+use App\Traits\HelperTrait;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
 {
-    use AlertTrait;
+    use AlertTrait, HelperTrait;
     /**
      * Display the registration view.
      */
@@ -58,5 +61,31 @@ class RegisteredUserController extends Controller
     public function surfaceUserRegister(): View
     {
         return view('frontend.pages.fe-register');
+    }
+
+    public function surfaceUserRegistrationStore(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|min:3|max:100',
+            'last_name' => 'required|min:3|max:100',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $member = new User();
+
+        $member->first_name = $request->first_name;
+        $member->last_name = $request->last_name;
+        $member->email = $request->email;
+        $member->password = Hash::make($request->password);
+        $member->unique_ref = $this->generateUniqueCode();
+        $member->full_name_slug = Str::slug($request->name . $request->last_name ? $request->last_name : '');
+        $member->role = 'user';
+
+        $member->save();
+
+        return redirect()
+            ->route('frontend.users.login')
+            ->with($this->successAlert('Registration complete! Log in to explore'));
     }
 }

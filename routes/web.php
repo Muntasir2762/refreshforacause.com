@@ -177,6 +177,8 @@ Route::prefix('/')
                 Route::get('/sign-in', [AuthenticatedSessionController::class, 'surfaceUserCreate'])->name('login');
 
                 Route::get('/sign-up', [RegisteredUserController::class, 'surfaceUserRegister'])->name('register');
+
+                Route::post('/sign-up/store', [RegisteredUserController::class, 'surfaceUserRegistrationStore'])->name('register.store');
             });
 
         Route::prefix('store/products')
