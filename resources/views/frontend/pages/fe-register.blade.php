@@ -28,7 +28,8 @@
 
                             <hr />
 
-                            <form action="" method="post">
+                            <form action="{{route('frontend.users.register.store')}}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

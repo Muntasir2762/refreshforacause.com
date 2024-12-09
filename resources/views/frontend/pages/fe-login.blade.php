@@ -28,7 +28,8 @@
 
                             <hr />
 
-                            <form action="" method="post">
+                            <form action="{{route('login')}}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
