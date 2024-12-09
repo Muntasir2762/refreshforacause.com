@@ -192,4 +192,11 @@ Route::prefix('/')
                 Route::get('/', [FrontendProductController::class, 'index'])
                     ->name('all');
             });
+
+        Route::prefix('cart')
+            ->name('cart.')
+            ->group(function () {
+                Route::get('/product/{id}/{slug}/{page}', [FrontendProductController::class, 'addToCart'])->name('add');
+                Route::get('/delete/{id}', [FrontendProductController::class, 'deleteCart'])->name('delete');
+            });    
     });

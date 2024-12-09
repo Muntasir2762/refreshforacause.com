@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
+use App\Traits\AlertTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    use AlertTrait;
     /**
      * Display a listing of the resource.
      */
@@ -64,4 +68,60 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function addToCart($id, $slug, $page)
+    {
+        // Find the product or return an error response
+        $product = Product::where('id', $id)->where('slug', $slug)->first();
+
+        if (!$product) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Product not found.',
+            ], 404);
+        }
+
+        // Check if the product is already in the cart
+        $cartExists = Cart::where('product_id', $product->id)
+            ->where(function ($query) {
+                if (Auth::check()) {
+                    $query->where('user_id', Auth::id());
+                } else {
+                    $query->where('ip_address', request()->ip());
+                }
+            })
+            ->exists();
+
+        if ($cartExists && $page == "single") {
+            return response()->json([
+                'status' => 'info',
+                'message' => 'Product is already in your cart.',
+            ]);
+        }
+
+        elseif($cartExists && $page == "bulk"){
+            return back()->with($this->errorAlert('Already Added to Cart!'));
+        }
+
+        // Add product to cart
+        Cart::create([
+            'product_id' => $product->id,
+            'ip_address' => request()->ip(),
+            'user_id' => Auth::check() ? Auth::id() : null,
+            'price' => $product->price - $product->price * (($product->discount_amount ?? 0) / 100),
+        ]);
+
+        if($page == "single"){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Product added to cart successfully!',
+                'productName' => $product->name,
+                'productImage' => asset($product->image),
+            ]);
+        }
+        else{
+            return back()->with($this->successAlert('Product Added to cart!'));
+        }
+    }
+
 }

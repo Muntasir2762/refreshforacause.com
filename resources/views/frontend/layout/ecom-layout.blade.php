@@ -3,6 +3,7 @@
 
 <head>
     @include('frontend.includes.head')
+    @stack('css')
 </head>
 
 <body>
@@ -29,6 +30,8 @@
     </div> <!--/wrapper-->
 
     @include('frontend.includes.script')
+
+    @stack('script')
 </body>
 
 </html>

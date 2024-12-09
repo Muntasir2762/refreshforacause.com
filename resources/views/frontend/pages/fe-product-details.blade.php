@@ -12,11 +12,11 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Product-Details</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$singleProduct->title}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $singleProduct->title }}</li>
                 </ol>
-                <h2 class="title">{{$singleProduct->title}}</h2>
+                <h2 class="title">{{ $singleProduct->title }}</h2>
                 <div class="text">
-                    <p>{{$singleProduct->sku_id}}</p>
+                    <p>{{ $singleProduct->sku_id }}</p>
                 </div>
             </div>
         </header>
@@ -34,7 +34,8 @@
 
                                 <div class="price">
                                     <span class="h3">
-                                        $ {{ $singleProduct->price - $singleProduct->price * ($singleProduct->discount_amount / 100) }}
+                                        $
+                                        {{ $singleProduct->price - $singleProduct->price * ($singleProduct->discount_amount / 100) }}
                                         <small>$ {{ $singleProduct->price }}</small>
                                     </span>
                                 </div>
@@ -52,7 +53,7 @@
 
                                 <div class="info-box">
                                     <span><strong>Materials</strong></span>
-                                    <span>{{$singleProduct->material}}</span>
+                                    <span>{{ $singleProduct->material }}</span>
                                 </div>
 
                                 <hr />
@@ -71,7 +72,7 @@
                                     </div> --}}
                                     <span><strong>Color</strong></span>
                                     <div class="product-colors clearfix">
-                                        <span class="">{{$singleProduct->color}}</span>
+                                        <span class="">{{ $singleProduct->color }}</span>
                                     </div>
                                 </div>
 
@@ -91,7 +92,7 @@
                                     </div> --}}
                                     <span><strong>Size</strong></span>
                                     <div class="product-colors clearfix">
-                                        <span class="">{{$singleProduct->size}}</span>
+                                        <span class="">{{ $singleProduct->size }}</span>
                                     </div>
                                 </div>
 
@@ -106,7 +107,8 @@
                                             @csrf
                                             <span class="row">
                                                 <span class="col-6">
-                                                    <input type="number" name="" value="1" min="1" class="form-control">
+                                                    <input type="number" name="" value="1" min="1"
+                                                        class="form-control">
                                                 </span>
                                                 <span class="col-6">
                                                     <button type="submit" class="btn btn-danger">Buy now</button>
@@ -121,7 +123,7 @@
                                 <div class="info-box">
                                     <span>
                                         <small>
-                                            {{$singleProduct->description}}
+                                            {{ $singleProduct->description }}
                                         </small>
                                     </span>
                                 </div>
@@ -129,9 +131,17 @@
                                 <hr />
 
                                 <div class="info-box info-box-addto added">
-                                    <span>
-                                        <a href="#"><i class="added"><i class="icon icon-cart"></i> Add to Cart</i></a>
+                                    <span id="add-to-cart-container">
+                                        <a href="javascript:void(0);" id="add-to-cart-btn"
+                                            data-url="{{ route('frontend.cart.add', [$singleProduct->id, $singleProduct->slug, 'single']) }}">
+                                            <i class="added"><i class="icon icon-cart"></i> Add to Cart</i>
+                                        </a>
                                     </span>
+                                    <div id="cart-preloader" class="page-loader" style="display: none;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {{-- <div class="info-box info-box-addto added">
@@ -165,13 +175,45 @@
                         <!--product gallery-->
 
                         <div class="owl-product-gallery owl-carousel owl-theme open-popup-gallery">
-                            @for ($i = 0; $i<=0; $i++)
-                                <a href="/{{$singleProduct->thumb_large}}">
-                                    <img src="{{ asset($singleProduct->thumb_large) }}" alt="{{$singleProduct->title}}" />
+                            @for ($i = 0; $i <= 0; $i++)
+                                <a href="/{{ $singleProduct->thumb_large }}">
+                                    <img src="{{ asset($singleProduct->thumb_large) }}"
+                                        alt="{{ $singleProduct->title }}" />
                                 </a>
                             @endfor
                         </div>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="cartModalLabel">Product Added to Cart</h5>
+                                    <!-- Close button corrected for Bootstrap 4 -->
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center" style="display: none">
+                                    <p><strong id="productName"></strong> has been added to your cart!</p>
+                                    <img id="productImage" src="" alt="Product Image"
+                                        class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-primary">Checkout</a>
+                                    <a href="{{ url('/') }}" class="btn btn-secondary" data-dismiss="modal">Continue
+                                        Shopping</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+
+
+
+
 
                 </div>
             </div>
@@ -179,3 +221,44 @@
 
     </section>
 @endsection
+
+@push('script')
+    <script>
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            const button = this;
+            const url = button.getAttribute('data-url');
+            const preloader = document.getElementById('cart-preloader');
+            const container = document.getElementById('add-to-cart-container');
+
+            // Show preloader
+            preloader.style.display = 'flex';
+            container.style.display = 'none';
+
+            fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide preloader
+                    preloader.style.display = 'none';
+                    container.style.display = 'block';
+
+                    // Update the modal content with product name and image
+                    document.getElementById('productName').textContent = data.productName;
+                    document.getElementById('productImage').src = data.productImage;
+
+                    // Show the modal using Bootstrap 4 jQuery method
+                    $('#cartModal').modal('show');
+                })
+                .catch(error => {
+                    preloader.style.display = 'none';
+                    container.style.display = 'block';
+                    alert('Failed to add product to cart. Please try again.');
+                    console.error(error);
+                });
+        });
+    </script>
+@endpush

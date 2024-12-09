@@ -14,7 +14,8 @@
                 <!--Slide item-->
 
                 @foreach ($bannerImages as $bannerImage)
-                    <div class="item d-flex align-items-center" style="background-image:url({{ asset($bannerImage->image) }});">
+                    <div class="item d-flex align-items-center"
+                        style="background-image:url({{ asset($bannerImage->image) }});">
                         <div class="container">
                             <div class="caption">
                                 <div class="animated" data-start="fadeInUp">
@@ -83,7 +84,8 @@
                                 </span> --}}
                             </div>
                             <div class="btn btn-add">
-                                <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
+                                <a href="{{ route('frontend.cart.add', [$product->id, $product->slug, 'bulk']) }}"
+                                    style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
@@ -158,7 +160,8 @@
                                 </span> --}}
                             </div>
                             <div class="btn btn-add">
-                                <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
+                                <a href="{{ route('frontend.cart.add', [$product->id, $product->slug, 'bulk']) }}"
+                                    style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
@@ -234,7 +237,8 @@
                                 </span> --}}
                             </div>
                             <div class="btn btn-add">
-                                <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
+                                <a href="{{ route('frontend.cart.add', [$product->id, $product->slug, 'bulk']) }}"
+                                    style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
@@ -310,7 +314,8 @@
                                 </span> --}}
                             </div>
                             <div class="btn btn-add">
-                                <a href="#" style="color: white"><i class="icon icon-cart"></i></a>
+                                <a href="{{ route('frontend.cart.add', [$product->id, $product->slug, 'bulk']) }}"
+                                    style="color: white"><i class="icon icon-cart"></i></a>
                             </div>
                             <div class="figure-grid">
                                 <div class="image">
