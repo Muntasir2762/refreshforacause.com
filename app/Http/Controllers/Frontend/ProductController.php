@@ -124,4 +124,58 @@ class ProductController extends Controller
         }
     }
 
+    public function addToCartDetailsPage (Request $request, string $id)
+    {
+         // Find the product or return an error response
+         $product = Product::where('id', $id)->first();
+
+         if (!$product) {
+            return back()->with($this->errorAlert('Product not found!'));
+         }
+ 
+         // Check if the product is already in the cart
+         $cartExists = Cart::where('product_id', $product->id)
+             ->where(function ($query) {
+                 if (Auth::check()) {
+                     $query->where('user_id', Auth::id());
+                 } else {
+                     $query->where('ip_address', request()->ip());
+                 }
+             })
+             ->first();
+ 
+         if ($cartExists) {
+            $cartExists->qty = $request->qty;
+            $cartExists->price = $product->price - $product->price * (($product->discount_amount ?? 0) / 100);
+            $cartExists->size = $request->size;
+            $cartExists->color = $request->color;
+            $cartExists->save();
+            return redirect()->route('frontend.cart.checkout.products')->with($this->successAlert('Product Added to cart!'));
+         }
+ 
+         // Add product to cart
+         Cart::create([
+             'product_id' => $product->id,
+             'ip_address' => request()->ip(),
+             'user_id' => Auth::check() ? Auth::id() : null,
+             'price' => $product->price - $product->price * (($product->discount_amount ?? 0) / 100),
+             'qty' => $request->qty,
+             'color' => $request->color,
+             'color' => $request->size,
+         ]);
+
+         return redirect()->route('frontend.cart.checkout.products')->with($this->successAlert('Product Added to cart!'));
+
+    }
+
+    public function checkOut ()
+    {
+        return view('frontend.pages.fe-product-checkout');
+    }
+
+    public function thankYou ($order_id)
+    {
+        return view ('frontend.pages.fe-thankyou');
+    }
+
 }

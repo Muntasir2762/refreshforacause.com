@@ -103,12 +103,13 @@
                                         Quantity
                                     </span>
                                     <span>
-                                        <form action="" method="">
+                                        <form action="{{route('frontend.cart.add.details', [$singleProduct->id, $singleProduct->slug])}}" method="POST">
                                             @csrf
                                             <span class="row">
                                                 <span class="col-6">
-                                                    <input type="number" name="" value="1" min="1"
-                                                        class="form-control">
+                                                    <input type="number" name="qty" value="1" min="1" class="form-control">
+                                                    <input type="hidden" name="color" id="color" value="{{$singleProduct->color}}" class="form-control">
+                                                    <input type="hidden" name="size" id="size" value="{{$singleProduct->size}}" class="form-control">
                                                 </span>
                                                 <span class="col-6">
                                                     <button type="submit" class="btn btn-danger">Buy now</button>
