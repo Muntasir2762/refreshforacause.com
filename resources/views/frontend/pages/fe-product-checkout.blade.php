@@ -22,7 +22,7 @@
                 <!-- Billing Details -->
                 <div class="col-md-6">
                     <h4>Billing Details</h4>
-                    <form action="" method="POST">
+                    <form action="{{ route('frontend.cart.checkout.order.store') }}" method="POST" id="orderConfirmation">
                         @csrf
                         <div class="mb-3">
                             <label for="first_name" class="form-label">First Name</label>
@@ -70,12 +70,14 @@
                             @endphp
                             @foreach ($cartItems as $item)
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <img src="{{ asset($item->product->thumb_small) }}" alt="{{ $item->product->title }}" class="img-thumbnail" style="width: 60px; height: 60px;">
+                                    <img src="{{ asset($item->product->thumb_small) }}" alt="{{ $item->product->title }}"
+                                        class="img-thumbnail" style="width: 60px; height: 60px;">
                                     <div>
                                         <p class="mb-0"><strong>{{ $item->product->title }}</strong></p>
                                         <small>${{ number_format($item->price, 2) }} x {{ $item->qty }}</small>
                                     </div>
-                                    <p class="mb-0"><strong>${{ number_format($item->price * $item->qty, 2) }}</strong></p>
+                                    <p class="mb-0"><strong>${{ number_format($item->price * $item->qty, 2) }}</strong>
+                                    </p>
                                 </div>
                                 @php
                                     $subTotal += $item->price * $item->qty;
@@ -83,16 +85,18 @@
                                 @endphp
                             @endforeach
                             <hr>
-                            <p><strong>Subtotal:</strong> ${{$subTotal}}</p>
+                            <p><strong>Subtotal:</strong> ${{ $subTotal }}</p>
                             {{-- <p><strong>Shipping:</strong> 222</p> --}}
                             <p><strong>Tax:</strong> {{ round($totalTax / $cartItems->sum('qty')) }}%</p>
-                            <p><strong>Grand Total:</strong> ${{ round($subTotal + ((round($totalTax / $cartItems->sum('qty'))/100)*$subTotal)) }}</p>
+                            <p><strong>Grand Total:</strong>
+                                ${{ round($subTotal + (round($totalTax / $cartItems->sum('qty')) / 100) * $subTotal) }}</p>
                         </div>
                     </div>
 
                     <h4 class="mt-4">Payment Method</h4>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" checked>
+                        <input class="form-check-input" type="radio" name="payment_method" id="credit_card"
+                            value="credit_card" checked>
                         <label class="form-check-label" for="credit_card">
                             Cash on Delivery (COD)
                         </label>
@@ -109,9 +113,27 @@
                             PayPal
                         </label>
                     </div> --}}
-                    <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+                    <button type="submit" onclick="submitOrder()" class="btn btn-primary mt-3">Place Order</button>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        // Function to submit the order form
+        function submitOrder() {
+            // Get the form element by its ID
+            var form = document.getElementById('orderConfirmation');
+
+            // Ensure the form exists
+            if (form) {
+                // Submit the form
+                form.submit();
+            } else {
+                console.error('Form with ID "orderConfirmation" not found!');
+            }
+        }
+    </script>
+@endpush

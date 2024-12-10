@@ -173,6 +173,21 @@ class ProductController extends Controller
         return view('frontend.pages.fe-product-checkout');
     }
 
+    public function storeOrder (Request $request)
+    {
+        if (session()->has('affiliate_id')) {
+            $affiliate_id = session('affiliate_id');
+            dd($affiliate_id);
+
+            //Place order and forget affiliate_id..
+            // session()->forget('affiliate_id');
+        }
+
+        else{
+            dd("No affiliate_id is found");
+        }
+    }
+
     public function thankYou ($order_id)
     {
         return view ('frontend.pages.fe-thankyou');
