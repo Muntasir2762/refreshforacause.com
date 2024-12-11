@@ -197,6 +197,10 @@ Route::prefix('/')
             ->name('cart.')
             ->group(function () {
                 Route::get('/product/{id}/{slug}/{page}', [FrontendProductController::class, 'addToCart'])->name('add');
+                Route::post('/product/details/{id}', [FrontendProductController::class, 'addToCartDetailsPage'])->name('add.details');
                 Route::get('/delete/{id}', [FrontendProductController::class, 'deleteCart'])->name('delete');
+                Route::get('/product/checkout', [FrontendProductController::class, 'checkOut'])->name('checkout.products');
+                Route::post('/product/order/store', [FrontendProductController::class, 'storeOrder'])->name('checkout.order.store');
+                Route::get('/order/checkout/confirmed/{order_id}', [FrontendProductController::class, 'thankYou'])->name('checkout.confirmed');
             });    
     });
