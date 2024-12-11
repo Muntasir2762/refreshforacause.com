@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Cart;
+use App\Models\Category;
+use App\Models\SiteSetting;
+use App\Models\SocialMedia;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -34,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
     
             $view->with('cartItems', $cartItems);
+            $view->with('siteSettings', SiteSetting::first());
+            $view->with('categories', Category::where('status', 'live')->get());
+            $view->with('socialMedia', SocialMedia::get());
         });
     }
 }

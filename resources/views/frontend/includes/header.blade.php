@@ -1,7 +1,7 @@
 <nav>
     <div class="container">
         <a href="{{ route('frontend.index') }}" class="logo">
-            <img src="{{ asset('images/site/logo/logo.png') }}" style="width: 100px; height: 35px" />
+            <img src="{{ asset($siteSettings->logo_dir.'/'.$siteSettings->logo_file_name) }}" style="width: 100px; height: 35px" alt="refreshforacause" />
         </a>
 
         <!-- ==========  Top navigation ========== -->
@@ -11,8 +11,8 @@
                 <!--add active class for current page-->
                 <li class="left-side">
                     <a href="{{ route('frontend.index') }}" class="logo-icon">
-                        <img src="{{ asset('images/site/logo/logo.png') }}" style="width: 80px; height: 38px"
-                            alt="Alternate Text" />
+                        <img src="{{ asset($siteSettings->logo_dir.'/'.$siteSettings->logo_file_name) }}" style="width: 80px; height: 38px"
+                            alt="refreshforacause" />
                     </a>
                 </li>
                 <li><a href="{{ route('frontend.users.login') }}"><i class="icon icon-user"></i></a>
@@ -20,16 +20,16 @@
                 <li><a href="javascript:void(0);" class="open-search"><i class="icon icon-magnifier"></i></a>
                 </li>
                 <li><a href="javascript:void(0);" class="open-cart"><i class="icon icon-cart"></i>
-                        <span>4</span></a></li>
+                        <span>{{$cartItems->count()}}</span></a></li>
             </ul>
         </div>
 
         <!-- ==========  Main navigation ========== -->
 
         <div class="navigation navigation-main">
-            <a href="#" class="open-login"><i class="icon icon-user"></i></a>
+            <a href="{{ route('frontend.users.login') }}" class="open-login"><i class="icon icon-user"></i></a>
             <a href="#" class="open-search"><i class="icon icon-magnifier"></i></a>
-            <a href="#" class="open-cart"><i class="icon icon-cart"></i> <span>4</span></a>
+            <a href="#" class="open-cart"><i class="icon icon-cart"></i> <span>{{$cartItems->count()}}</span></a>
             <a href="#" class="open-menu"><i class="icon icon-menu"></i></a>
 
             <div class="floating-menu">
@@ -39,20 +39,18 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="#">Home</span></a>
+                        <a href="{{route('frontend.index')}}">Home</span></a>
                     </li>
                     <li>
-                        <a href="#">Pages <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                        <a href="#">Product Categories <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
                         <div class="navbar-dropdown navbar-dropdown-single">
                             <div class="navbar-box">
                                 <div class="box-full">
                                     <div class="box clearfix">
                                         <ul>
-                                            <li class="label">Addons</li>
-                                            <li><a href="about.html">About us</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="404.html">Not found 404</a></li>
-                                            <li><a href="login.html">Login & Register</a></li>
+                                            @foreach ($categories as $category)
+                                            <li><a href="#">{{$category->name}}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -61,7 +59,7 @@
                     </li>
 
 
-                    <li class="nav-settings">
+                    {{-- <li class="nav-settings">
                         <a href="javascript:void(0);"><span class="nav-settings-value">USD</span> <span
                                 class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
                         <div class="navbar-dropdown navbar-dropdown-single">
@@ -77,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -217,11 +215,11 @@
                     <div class="cart-block-buttons clearfix">
                         <div class="row">
                             <div class="col-sm-6">
-                                <a href="products-grid.html" class="btn btn-outline-info">Continue
+                                <a href="{{route('frontend.index')}}" class="btn btn-outline-info">Continue
                                     shopping</a>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a href="checkout-1.html" class="btn btn-outline-warning"><span
+                                <a href="{{route('frontend.cart.checkout.products')}}" class="btn btn-outline-warning"><span
                                         class="icon icon-cart"></span> Checkout</a>
                             </div>
                         </div>
