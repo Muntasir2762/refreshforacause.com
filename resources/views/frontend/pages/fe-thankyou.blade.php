@@ -14,7 +14,7 @@
                     <hr class="my-4">
                     <h3>Order Summary</h3>
                     <div class="mt-3 mb-3">
-                        <p><strong>Order ID:</strong> REFC0001</p>
+                        <p><strong>Order ID:</strong> {{$order->invoice_no}}</p>
                         {{-- <p><strong>Order Date:</strong> {{ $order->created_at->format('d M, Y') }}</p>
                         <p><strong>Total Amount:</strong> ${{ number_format($order->total, 2) }}</p> --}}
                     </div>
@@ -30,7 +30,7 @@
                             </li>
                         @endforeach
                     </ul> --}}
-                    <p class="text-muted">A confirmation email has been sent to your email address.</p>
+                    <p class="text-muted">Our team will contact you soon!</p>
                     <a href="/" class="btn btn-primary mt-3">Continue Shopping</a>
                 </div>
             </div>

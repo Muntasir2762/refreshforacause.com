@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('affiliate_id')->nullable();
             $table->string('invoice_no');
             $table->string('buyer_name');
-            $table->string('buyer_pone');
+            $table->string('buyer_phone');
             $table->string('buyer_email')->nullable();
             $table->string('buyer_address');
             $table->string('buyer_city')->nullable();

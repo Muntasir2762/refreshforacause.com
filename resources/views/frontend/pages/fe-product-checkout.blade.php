@@ -25,38 +25,34 @@
                     <form action="{{ route('frontend.cart.checkout.order.store') }}" method="POST" id="orderConfirmation">
                         @csrf
                         <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" name="first_name" id="first_name" class="form-control" required>
+                            <label for="buyer_name" class="form-label">Your Name</label>
+                            <input type="text" name="buyer_name" id="buyer_name" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" name="last_name" id="last_name" class="form-control" required>
+                            <label for="buyer_email" class="form-label">Email</label>
+                            <input type="email" name="buyer_email" id="buyer_email" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" required>
+                            <label for="buyer_phone" class="form-label">Phone</label>
+                            <input type="text" name="buyer_phone" id="buyer_phone" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" name="phone" id="phone" class="form-control" required>
+                            <label for="buyer_address" class="form-label">Shipping Address</label>
+                            <textarea name="buyer_address" id="buyer_address" class="form-control" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" name="address" id="address" class="form-control" required>
+                            <label for="buyer_city" class="form-label">City</label>
+                            <input type="text" name="buyer_city" id="buyer_city" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="city" class="form-label">City</label>
-                            <input type="text" name="city" id="city" class="form-control" required>
+                            <label for="buyer_state" class="form-label">State</label>
+                            <input type="text" name="buyer_state" id="buyer_state" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="state" class="form-label">State</label>
-                            <input type="text" name="state" id="state" class="form-control" required>
+                            <label for="buyer_zipcode" class="form-label">Zip Code</label>
+                            <input type="text" name="buyer_zipcode" id="buyer_zipcode" class="form-control">
                         </div>
-                        <div class="mb-3">
-                            <label for="zip" class="form-label">Zip Code</label>
-                            <input type="text" name="zip" id="zip" class="form-control" required>
-                        </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>
 
                 <!-- Order Summary -->
@@ -86,21 +82,39 @@
                             @endforeach
                             <hr>
                             <p><strong>Subtotal:</strong> ${{ $subTotal }}</p>
+                            <input type="hidden" name="sub_total" value="{{ $subTotal }}">
                             {{-- <p><strong>Shipping:</strong> 222</p> --}}
-                            <p><strong>Tax:</strong> {{ round($totalTax / $cartItems->sum('qty')) }}%</p>
-                            <p><strong>Grand Total:</strong>
-                                ${{ round($subTotal + (round($totalTax / $cartItems->sum('qty')) / 100) * $subTotal) }}</p>
+                            <p><strong>Tax:</strong>
+                                @if ($cartItems->sum('qty') > 0)
+                                    {{ round($totalTax / $cartItems->sum('qty')) }}%
+                                    <input type="hidden" name="total_vat" value="{{ round($totalTax / $cartItems->sum('qty')) }}">
+                                @else
+                                    0% {{-- Or display some appropriate message --}}
+                                    <input type="hidden" name="total_vat" value="0">
+                                @endif
+                            </p>
+                            @php
+                                $totalQty = $cartItems->sum('qty');
+                                $taxRate = $totalQty > 0 ? round($totalTax / $totalQty) : 0; // Safely calculate tax rate
+                            @endphp
+
+                            <p>
+                                <strong>Grand Total:</strong> 
+                                ${{ round($subTotal + ($taxRate / 100) * $subTotal) }}
+                                <input type="hidden" name="grand_total" value="{{ round($subTotal + ($taxRate / 100) * $subTotal) }}">
+                            </p>
                         </div>
                     </div>
 
                     <h4 class="mt-4">Payment Method</h4>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment_method" id="credit_card"
-                            value="credit_card" checked>
-                        <label class="form-check-label" for="credit_card">
+                        <input class="form-check-input" type="radio" name="payment_method" id="cod"
+                            value="cod" checked>
+                        <label class="form-check-label" for="cod">
                             Cash on Delivery (COD)
                         </label>
                     </div>
+                </form>
                     {{-- <div class="form-check">
                         <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" checked>
                         <label class="form-check-label" for="credit_card">

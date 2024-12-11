@@ -21,4 +21,9 @@ class Order extends Model
             return 'RFC' . sprintf('%04d', $string+1);
         }
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'order_id', 'id')->with('product');
+    }
 }
