@@ -46,6 +46,17 @@
         </div>
     </section>
 
+     <!-- ========================  Fundraising Benefits Section ======================== -->
+
+     <section class="fundraising-benefits-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title mb-4">Fundraising Made Easy</h2>
+            <p class="mb-5">
+                When your organization partners with us, you’ll receive 50% of all profits from each sale, directly supporting your cause. And here’s the best part – you don’t have to handle inventory or distribution. Our hassle-free system ensures that all water bottles and tumblers are shipped directly to each buyer, so your team can stay focused on what matters most.
+            </p>
+        </div>
+    </section>
+
     <!-- ========================  Features Section ======================== -->
 
     <section class="features-section py-5 bg-light">
