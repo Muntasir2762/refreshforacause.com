@@ -21,7 +21,7 @@
                         <div class="col-md-2">
                             <h5>Get to Know Us</h5>
                             <ul>
-                                <li><a href="#">About Us</a></li>
+                                <li><a href="{{route('frontend.inner.about.us')}}">About Us</a></li>
                                 <li><a href="#">Contact Us</a></li>
                             </ul>
                         </div>
