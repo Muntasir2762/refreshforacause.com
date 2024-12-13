@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index(Request $request, string $cat_slug, string $cat_id)
     {
-        $catProducts = Product::where('category_id', $cat_id)->with('category')->paginate(2);
+        $catProducts = Product::where('category_id', $cat_id)->with('category')->paginate(30);
         return view('frontend.pages.fe-products', compact('catProducts'));
     }
 
