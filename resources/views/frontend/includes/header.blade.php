@@ -42,7 +42,23 @@
                         <a href="{{route('frontend.index')}}">Home</span></a>
                     </li>
                     <li>
-                        <a href="#">Product Categories <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                        <a href="#">River City Raptors <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                        <div class="navbar-dropdown navbar-dropdown-single">
+                            <div class="navbar-box">
+                                <div class="box-full">
+                                    <div class="box clearfix">
+                                        <ul>
+                                            @foreach ($categories as $category)
+                                            <li><a href="{{route('frontend.products.all', [$category->slug, $category->id])}}">{{$category->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">River City Raptors <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
                         <div class="navbar-dropdown navbar-dropdown-single">
                             <div class="navbar-box">
                                 <div class="box-full">
