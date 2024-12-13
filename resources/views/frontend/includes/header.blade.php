@@ -49,7 +49,7 @@
                                     <div class="box clearfix">
                                         <ul>
                                             @foreach ($categories as $category)
-                                            <li><a href="#">{{$category->name}}</a></li>
+                                            <li><a href="{{route('frontend.products.all', [$category->slug, $category->id])}}">{{$category->name}}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -98,67 +98,32 @@
 
                     <div class="row">
 
+                        @php
+                            $subTotal = 0;
+                        @endphp
+                        @foreach ($cartItems as $cart)
                         <div class="cart-block cart-block-item clearfix">
                             <div class="image">
-                                <a href="product.html"><img src="assets/images/item-1.jpg" alt="" /></a>
+                                <a href="{{ route('frontend.products.details', ['id' => $cart->product->id, 'slug' => $cart->product->slug]) }}"><img src="{{ asset($cart->product->thumb_large) }}" alt="" /></a>
                             </div>
                             <div class="title">
-                                <div><a href="product.html">Product item</a></div>
-                                <small>Product category</small>
+                                <div><a href="product.html">{{$cart->product->title}}</a></div>
+                                <small>{{$cart->product->category->name}}</small>
                             </div>
                             <div class="quantity">
-                                <input type="number" value="2" class="form-control form-quantity" />
+                                <input type="number" value="{{$cart->qty}}" class="form-control form-quantity" readonly/>
                             </div>
                             <div class="price">
-                                <span class="final">$ 1.998</span>
-                                <span class="discount">$ 2.666</span>
+                                <span class="final">$ {{$cart->price}}</span>
+                                {{-- <span class="discount">$ 2.666</span> --}}
                             </div>
                             <!--delete-this-item-->
-                            <span class="icon icon-cross icon-delete"></span>
+                            <a href="{{route('frontend.cart.delete', [$cart->id])}}"><span class="icon icon-cross icon-delete"></span></a>
                         </div>
-
-                        <!--cart item-->
-
-                        <div class="cart-block cart-block-item clearfix">
-                            <div class="image">
-                                <a href="product.html"><img src="assets/images/item-2.jpg" alt="" /></a>
-                            </div>
-                            <div class="title">
-                                <div><a href="product.html">Product item</a></div>
-                                <small>Product category</small>
-                            </div>
-                            <div class="quantity">
-                                <input type="number" value="2" class="form-control form-quantity" />
-                            </div>
-                            <div class="price">
-                                <span class="final">$ 1.998</span>
-                                <span class="discount">$ 2.666</span>
-                            </div>
-                            <!--delete-this-item-->
-                            <span class="icon icon-cross icon-delete"></span>
-                        </div>
-
-                        <!--cart item-->
-
-                        <div class="cart-block cart-block-item clearfix">
-                            <div class="image">
-                                <a href="product.html"><img src="assets/images/item-3.jpg" alt="" /></a>
-                            </div>
-                            <div class="title">
-                                <div><a href="product.html">Product item</a></div>
-                                <small>Product category</small>
-                            </div>
-                            <div class="quantity">
-                                <input type="number" value="2" class="form-control form-quantity" />
-                            </div>
-                            <div class="price">
-                                <span class="final">$ 1.998</span>
-                                <span class="discount">$ 2.666</span>
-                            </div>
-                            <!--delete-this-item-->
-                            <span class="icon icon-cross icon-delete"></span>
-                        </div>
-
+                        @php
+                            $subTotal += $cart->price * $cart->qty;
+                        @endphp
+                        @endforeach
                     </div>
 
                     <hr />
@@ -166,32 +131,32 @@
                     <!--cart prices -->
 
                     <div class="clearfix">
-                        <div class="cart-block cart-block-footer clearfix">
+                        {{-- <div class="cart-block cart-block-footer clearfix">
                             <div>
                                 <strong>Discount 15%</strong>
                             </div>
                             <div>
                                 <span>$ 159,00</span>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="cart-block cart-block-footer clearfix">
+                        {{-- <div class="cart-block cart-block-footer clearfix">
                             <div>
                                 <strong>Shipping</strong>
                             </div>
                             <div>
                                 <span>$ 30,00</span>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="cart-block cart-block-footer clearfix">
+                        {{-- <div class="cart-block cart-block-footer clearfix">
                             <div>
                                 <strong>VAT</strong>
                             </div>
                             <div>
                                 <span>$ 59,00</span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <hr />
@@ -204,7 +169,7 @@
                                 <strong>Total</strong>
                             </div>
                             <div>
-                                <div class="h4 title">$ 1259,00</div>
+                                <div class="h4 title">$ {{$subTotal}}</div>
                             </div>
                         </div>
                     </div>

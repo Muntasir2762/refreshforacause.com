@@ -69,4 +69,11 @@ class HomeController extends Controller
     {
         //
     }
+
+    //Inner Pages...
+
+    public function aboutUs ()
+    {
+        return view ('frontend.inner-pages.about-us');
+    }
 }

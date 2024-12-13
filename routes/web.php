@@ -189,8 +189,7 @@ Route::prefix('/')
                 Route::get('/details/{id}/{slug}', [FrontendProductController::class, 'show'])->name('details');
                 //This route should have a slug of the product category e.g. bottle
                 //Example URI store/products/bottle
-                Route::get('/', [FrontendProductController::class, 'index'])
-                    ->name('all');
+                Route::get('/{cat_slug}/{cat_id}', [FrontendProductController::class, 'index'])->name('all');
             });
 
         Route::prefix('cart')
@@ -202,5 +201,10 @@ Route::prefix('/')
                 Route::get('/product/checkout', [FrontendProductController::class, 'checkOut'])->name('checkout.products');
                 Route::post('/product/order/store', [FrontendProductController::class, 'storeOrder'])->name('checkout.order.store');
                 Route::get('/order/checkout/confirmed/{order_id}', [FrontendProductController::class, 'thankYou'])->name('checkout.confirmed');
-            });    
+            });   
+            
+        Route::name('inner.')
+            ->group(function () {
+                Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about.us');
+            });  
     });

@@ -18,9 +18,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, string $cat_slug, string $cat_id)
     {
-        return view('frontend.pages.fe-products');
+        $catProducts = Product::where('category_id', $cat_id)->with('category')->paginate(2);
+        return view('frontend.pages.fe-products', compact('catProducts'));
     }
 
     /**
@@ -165,6 +166,13 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('frontend.cart.checkout.products')->with($this->successAlert('Product Added to cart!'));
+    }
+
+    public function deleteCart ($id)
+    {
+        $cart = Cart::findOrFail($id);
+        $cart->delete();
+        return back()->with($this->errorAlert('Item is removed from cart!'));
     }
 
     public function checkOut()

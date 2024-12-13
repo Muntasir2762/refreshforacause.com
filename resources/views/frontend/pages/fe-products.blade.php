@@ -1,5 +1,11 @@
 @extends('frontend.layout.ecom-layout')
-
+@push('css')
+    <style>
+        .pagination {
+            justify-content: center !important;
+        }
+    </style>
+@endpush
 @section('pageTitle')
     All Products
 @endsection
@@ -11,12 +17,18 @@
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    @if ($catProducts->count() > 0)
+                        <li class="breadcrumb-item active" aria-current="page">{{ $catProducts[0]->category->name }}</li>
+                        @else
+                        <li class="breadcrumb-item active" aria-current="page">Not Availble</li>
+                    @endif
                 </ol>
-                <h2 class="title">Product list {category_name}</h2>
+                @if ($catProducts->count() > 0)
+                    <h2 class="title">Product list of {{ $catProducts[0]->category->name }}</h2>
+                @endif
                 <div class="text">
-                    <p>Total Products {count}</p>
+                    <p>Total Products {{ $catProducts->count() }}</p>
                 </div>
             </div>
         </header>
@@ -25,7 +37,7 @@
 
             <div class="row">
 
-                <div class="col-12">
+                {{-- <div class="col-12">
 
                     <!-- === product-filters === -->
                     <!--Replace all these dropdowns with HTML select/input using bootstrap class-->
@@ -183,7 +195,7 @@
                         </div><!--/row-->
 
                     </div> <!--/filters-->
-                </div>
+                </div> --}}
 
                 <!--Products-->
 
@@ -195,9 +207,10 @@
 
                         <!--Product item-->
 
-                        <div class="col-6 col-lg-4">
-                            <article>
-                                <div class="info">
+                        @foreach ($catProducts as $product)
+                            <div class="col-6 col-lg-4">
+                                <article>
+                                    {{-- <div class="info">
                                     <span class="add-favorite">
                                         <a href="javascript:void(0);" data-title="Add to favorites"
                                             data-title-added="Added to favorites list">
@@ -209,37 +222,46 @@
                                             <i class="icon icon-eye"></i>
                                         </a>
                                     </span>
-                                </div>
-                                <div class="btn btn-add">
-                                    <i class="icon icon-cart"></i>
-                                </div>
-                                <div class="figure-grid">
-                                    <span class="badge badge-info">New arrival</span>
-                                    <div class="image">
-                                        <a href="product.html">
-                                            <img src="assets/images/item-2.jpg" alt="" />
-                                        </a>
+                                </div> --}}
+                                    <div class="btn btn-add">
+                                        <a href="{{ route('frontend.cart.add', [$product->id, $product->slug, 'bulk']) }}"
+                                            style="color: white"><i class="icon icon-cart"></i></a>
                                     </div>
-                                    <div class="text">
-                                        <h2 class="title h4">
-                                            <a href="product.html">Lucy</a>
-                                        </h2>
-                                        <sub>$ 899,-</sub>
-                                        <sup>$ 750,-</sup>
-                                        <span class="description clearfix">
-                                            Gubergren amet dolor ea diam takimata consetetur facilisis blandit et aliquyam
-                                            lorem ea duo labore diam sit et consetetur nulla
-                                        </span>
+                                    <div class="figure-grid">
+                                        <span class="badge badge-info">{{ ucFirst($product->trend_type) }}</span>
+                                        <div class="image">
+                                            <a
+                                                href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                                <img src="{{ asset($product->thumb_large) }}" alt="{{ $product->title }}" />
+                                            </a>
+                                        </div>
+                                        <div class="text">
+                                            <h2 class="title h4">
+                                                <a
+                                                    href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">Lucy</a>
+                                            </h2>
+                                            <sub>$ {{ $product->price }}</sub>
+                                            <sup>$
+                                                {{ $product->price - $product->price * ($product->discount_amount / 100) }}</sup>
+                                            <span class="description clearfix">
+                                                Gubergren amet dolor ea diam takimata consetetur facilisis blandit et
+                                                aliquyam
+                                                lorem ea duo labore diam sit et consetetur nulla
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
+                                </article>
+                            </div>
+                        @endforeach
 
                     </div>
 
 
                     <!--Pagination-->
-                    <div class="pagination-wrapper">
+                    <div class="pagination-wrapper d-flex justify-content-center">
+                        {!! $catProducts->links() !!}
+                    </div>
+                    {{-- <div class="pagination-wrapper">
                         <ul class="pagination justify-content-center">
                             <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -247,11 +269,11 @@
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                     <!-- === sort bar === -->
 
-                    <div class="sort-bar clearfix">
+                    {{-- <div class="sort-bar clearfix">
                         <div class="sort-results pull-left">
                             <!--Showing result per page-->
                             <select>
@@ -273,7 +295,7 @@
                                 <option value="4">Price: highest</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div> <!--/product items-->
 
