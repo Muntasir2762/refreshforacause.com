@@ -82,4 +82,9 @@ class User extends Authenticatable
             get: fn() => ucfirst(strtolower($this->attributes['first_name'])) . ' ' . ucfirst(strtolower($this->attributes['last_name'])),
         );
     }
+
+    public function organization ()
+    {
+        return $this->belongsTo(User::class, 'org_id', 'id');
+    }
 }

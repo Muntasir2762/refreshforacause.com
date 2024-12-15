@@ -95,6 +95,8 @@
     </div>
 
     @include('admin.includes.script')
+
+    @stack('extra_script')
 </body>
 
 </html>
