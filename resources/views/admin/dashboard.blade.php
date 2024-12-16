@@ -179,7 +179,7 @@
                 </a>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
             <div class="col-md-6 col-lg-3">
                 <a href="#">
@@ -290,7 +290,7 @@
                 </a>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
@@ -306,7 +306,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
             <div class="col-md-6 col-lg-3">
                 <a href="#">

@@ -34,6 +34,8 @@ return new class extends Migration
             $table->text('avatar_image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->double('total_credit')->default(0);
+            $table->double('total_withdraw')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
