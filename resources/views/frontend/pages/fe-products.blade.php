@@ -238,7 +238,7 @@
                                         <div class="text">
                                             <h2 class="title h4">
                                                 <a
-                                                    href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">Lucy</a>
+                                                    href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{$product->title}}</a>
                                             </h2>
                                             <sub>$ {{ $product->price }}</sub>
                                             <sup>$

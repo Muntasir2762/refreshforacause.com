@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetails::class, 'order_id', 'id')->with('product');
     }
+
+    public function affiliateMember()
+    {
+        return $this->belongsTo(User::class, 'affiliate_id', 'unique_ref')->with('organization');
+    }
 }

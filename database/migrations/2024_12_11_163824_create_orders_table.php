@@ -31,7 +31,7 @@ return new class extends Migration
             $table->double('grand_total');
             $table->string('payment_status')->nullable();
             $table->string('payment_method')->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('pending')->comment('pending, confirmed, delivered, cancelled, returned');
             $table->timestamps();
         });
     }

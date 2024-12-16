@@ -69,6 +69,37 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-shopping-cart"></i>
+                        </span>
+                        <span class="title">Orders</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('manage.orders', ['all']) }}">All Orders</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.orders', ['pending']) }}">Pending Orders</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.orders', ['confirmed']) }}">Confirmed Orders</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.orders', ['delivered']) }}">Delivered Orders</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.orders', ['cancelled']) }}">Cancelled Orders</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.orders', ['returned']) }}">Returned Orders</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="{{ route('manage.users.index') }}">
                         <span class="icon-holder">
                             <i class="anticon anticon-team"></i>

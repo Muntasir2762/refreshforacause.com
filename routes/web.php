@@ -15,6 +15,7 @@ use App\Http\Controllers\CompanyAdmin\SurfaceUserController;
 use App\Http\Controllers\CompanyAdmin\TrackingScriptController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -138,6 +139,12 @@ Route::middleware(['role:companyadmin'])
                     ->name('store');
                 Route::delete('/delete/{id}', [BannerImageController::class, 'destroy'])
                     ->name('delete');
+            });
+
+        Route::prefix('manage-orders')
+            ->name('manage.')
+            ->group(function () {
+                Route::get('/{order_status}', [OrderController::class, 'getOrders'])->name('orders');
             });
     });
 
