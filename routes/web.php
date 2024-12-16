@@ -145,6 +145,7 @@ Route::middleware(['role:companyadmin'])
             ->name('manage.')
             ->group(function () {
                 Route::get('/{order_status}', [OrderController::class, 'getOrders'])->name('orders');
+                Route::post('/update-order-status', [OrderController::class, 'updateStatus'])->name('orders.status');
             });
     });
 

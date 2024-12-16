@@ -12,12 +12,13 @@
         <div class="col-md-12">
             <form action="{{ route('manage.orders', ['all']) }}" method="GET" class="d-flex">
                 @csrf
-                <input type="text" id="db_search" name="db_search" class="form-control mr-2" placeholder="Put Order ID or Phone...">
+                <input type="text" id="db_search" name="db_search" class="form-control mr-2"
+                    placeholder="Put Order ID or Phone...">
                 <button type="submit" class="btn btn-primary">Search</button>
                 <a href="{{ route('manage.orders', ['all']) }}" class="btn btn-secondary ml-2">Clear</a>
             </form>
         </div>
-    </div>          
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -41,7 +42,7 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>
-                                            {{ $order->invoice_no }}
+                                            {{ $order->invoice_no }} <br>
                                             @if ($order->affiliate_id != null)
                                                 <span class="badge badge-success">Org:
                                                     {{ $order->affiliateMember?->organization?->first_name ?? 'Not Found' }}</span><br>
@@ -69,7 +70,31 @@
                                             {{ $order->grand_total }}
                                         </td>
                                         <td>
-                                            Test
+                                            <!-- Dropdown for status -->
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton{{ $order->id }}" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    @if ($order->status)
+                                                        {{ ucfirst($order->status) }}
+                                                    @else
+                                                        Select Status
+                                                    @endif
+                                                </button>
+                                                <div class="dropdown-menu"
+                                                    aria-labelledby="dropdownMenuButton{{ $order->id }}">
+                                                    <a class="dropdown-item" href="#" data-status="pending"
+                                                        onclick="updateStatus({{ $order->id }}, 'pending', event)">Pending</a>
+                                                    <a class="dropdown-item" href="#" data-status="confirmed"
+                                                        onclick="updateStatus({{ $order->id }}, 'confirmed', event)">Confirmed</a>
+                                                    <a class="dropdown-item" href="#" data-status="delivered"
+                                                        onclick="updateStatus({{ $order->id }}, 'delivered', event)">Delivered</a>
+                                                    <a class="dropdown-item" href="#" data-status="cancelled"
+                                                        onclick="updateStatus({{ $order->id }}, 'cancelled', event)">Cancelled</a>
+                                                    <a class="dropdown-item" href="#" data-status="returned"
+                                                        onclick="updateStatus({{ $order->id }}, 'returned', event)">Returned</a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>{{ $order->created_at->format('m-d-Y') }}</td>
                                         <td class="text-right">
@@ -79,17 +104,18 @@
                                                         <i class="anticon anticon-eye"></i>
                                                     </button>
                                                 </div>
-                                                <div class="mr-1">
+                                                {{-- <div class="mr-1">
                                                     <a href="#"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded btn-info">
                                                         <i class="anticon anticon-edit"></i>
                                                     </a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                         {{-- <div class="row">
                             <div class="text-right justify-end">
@@ -116,5 +142,47 @@
                 lengthChange: true, // Allow users to change the number of records displayed
             });
         });
+    </script>
+
+    <script>
+        function updateStatus(orderId, status, event) {
+            event.preventDefault(); // Prevent the default behavior (form submission or link click)
+
+            $.ajax({
+                url: '/manage-orders/update-order-status', // Update with your route for status update
+                method: 'POST',
+                data: {
+                    order_id: orderId,
+                    status: status,
+                    _token: '{{ csrf_token() }}' // Include CSRF token for security
+                },
+                success: function(response) {
+                    if (response.success) {
+                        toastr.success('Order status updated successfully!', 'Success', {
+                            "positionClass": "toast-top-right",
+                            "timeOut": "3000", // Duration in milliseconds
+                            "closeButton": true
+                        });
+
+                        // Update the dropdown button text dynamically
+                        $('#dropdownMenuButton' + orderId).text(status.charAt(0).toUpperCase() + status.slice(
+                            1));
+                    } else {
+                        toastr.error('Failed to update order status.', 'Error', {
+                            "positionClass": "toast-top-right",
+                            "timeOut": "3000",
+                            "closeButton": true
+                        });
+                    }
+                },
+                error: function() {
+                    toastr.error('An error occurred.', 'Error', {
+                        "positionClass": "toast-top-right",
+                        "timeOut": "3000",
+                        "closeButton": true
+                    });
+                }
+            });
+        }
     </script>
 @endpush

@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function getOrders (Request $request, string $order_status)
     {
-        $query = Order::with('orderDetails', 'affiliateMember');
+        $query = Order::with('orderDetails', 'affiliateMember')->orderBy('id', 'desc');
 
         if(isset($request->db_search)){
             $orders = $query->where(function ($query) use ($request) {
@@ -30,5 +30,19 @@ class OrderController extends Controller
 
             return view('admin.order.index', compact('orders', 'order_status'));
         }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $order = Order::find($request->order_id);
+
+        if ($order) {
+            $order->status = $request->status;
+            $order->save();
+            
+            return response()->json(['success' => true]);
+        }
+        
+        return response()->json(['success' => false]);
     }
 }

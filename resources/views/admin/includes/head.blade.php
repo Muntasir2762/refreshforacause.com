@@ -8,6 +8,9 @@
 {{-- Datatable.. --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 {{-- Datatable.. --}}
+<!-- Toastr CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<!-- Toastr CSS -->
 @yield('pluginCss')
 <link href="{{ asset('admin/assets/css/app.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('admin/assets/vendors/toastr/css/toastr.css') }}">
