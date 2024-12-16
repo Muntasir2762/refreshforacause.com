@@ -133,7 +133,7 @@
             @endif
 
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-appstore"></i>
@@ -192,7 +192,7 @@
                         </ul>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>
