@@ -96,7 +96,7 @@
             <hr style="border: 1px solid #000; display: block; width: 100%; margin: 10px 0;">
 
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{route('manage.campaigns.index')}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -104,7 +104,9 @@
                                     <i class="anticon anticon-line-chart"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Campaign::count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Campaigns</p>
                                 </div>
                             </div>
@@ -258,7 +260,7 @@
                 </a>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
@@ -274,7 +276,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
             <hr style="border: 1px solid #000; display: block; width: 100%; margin: 10px 0;">
 
             <div class="col-md-6 col-lg-3">
@@ -369,7 +371,7 @@
                 </a>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
@@ -385,7 +387,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
             <hr style="border: 1px solid #000; display: block; width: 100%; margin: 10px 0;">
 
             <div class="col-md-6 col-lg-3">

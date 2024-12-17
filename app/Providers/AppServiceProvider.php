@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Campaign;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\SiteSetting;
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
     
             $view->with('cartItems', $cartItems);
             $view->with('siteSettings', SiteSetting::first());
+            $view->with('globalCampaigns', Campaign::where('status', 'live')->get());
             $view->with('categories', Category::where('status', 'live')->get());
             $view->with('socialMedia', SocialMedia::get());
         });

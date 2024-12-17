@@ -8,6 +8,7 @@
     <div class="page-header">
         <h2 class="header-title">{{ ucfirst($order_status) }} Orders</h2>
     </div>
+    @if (count($orders))
     <div class="row mb-3">
         <div class="col-md-12">
             @if ($type == "generalorder")
@@ -52,6 +53,7 @@
             </form>
         </div>
     </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">

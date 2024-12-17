@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CompanyAdmin\OrganizationController;
 use App\Http\Controllers\CompanyAdmin\ProfileController as BackOfficeProfileController;
 use App\Http\Controllers\ProfileController;
@@ -105,6 +106,19 @@ Route::middleware(['role:companyadmin'])
                     ->name('update');
             });
 
+        Route::prefix('manage-campaigns')
+            ->name('manage.campaigns.')
+            ->group(function () {
+                Route::get('/', [CampaignController::class, 'index'])
+                    ->name('index');
+                Route::post('/store', [CampaignController::class, 'store'])
+                    ->name('store');
+                Route::get('/edit/{id}', [CampaignController::class, 'edit'])
+                    ->name('edit');
+                Route::post('/update/{id}', [CampaignController::class, 'update'])
+                    ->name('update');
+            });
+
         Route::prefix('manage-categories')
             ->name('manage.categories.')
             ->group(function () {
@@ -204,6 +218,7 @@ Route::prefix('/')
                 //This route should have a slug of the product category e.g. bottle
                 //Example URI store/products/bottle
                 Route::get('/{cat_slug}/{cat_id}', [FrontendProductController::class, 'index'])->name('all');
+                Route::get('/campaign/{camp_slug}/{camp_id}', [HomeController::class, 'indexCampaign'])->name('campaign');
             });
 
         Route::prefix('cart')

@@ -41,8 +41,9 @@
                     <li>
                         <a href="{{route('frontend.index')}}">Home</span></a>
                     </li>
+                    @foreach ($globalCampaigns as $campaign)
                     <li>
-                        <a href="#">River City Raptors <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                        <a href="{{route('frontend.products.campaign', [$campaign->slug, $campaign->id])}}">{{$campaign->name}} <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
                         <div class="navbar-dropdown navbar-dropdown-single">
                             <div class="navbar-box">
                                 <div class="box-full">
@@ -57,6 +58,7 @@
                             </div>
                         </div>
                     </li>
+                    @endforeach
 
 
                     {{-- <li class="nav-settings">
