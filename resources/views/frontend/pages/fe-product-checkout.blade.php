@@ -21,9 +21,20 @@
             <div class="row">
                 <!-- Billing Details -->
                 <div class="col-md-6">
-                    <h4>Billing Details</h4>
                     <form action="{{ route('frontend.cart.checkout.order.store') }}" method="POST" id="orderConfirmation">
                         @csrf
+                        @if (!session()->has('affiliate_id') || session('affiliate_id') == 'No affiliate_id is found')
+                        <div class="mb-3">
+                            <label for="affiliate_id" class="form-label">Select an organization to donate to</label>
+                            <select name="affiliate_id" id="affiliate_id" class="form-control">
+                                <option value="" disabled selected>Select an organization</option>
+                                @foreach ($globalOrganizations as $organization)
+                                    <option value="{{$organization->unique_ref}}">{{$organization->first_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif                     
+                        <h4>Billing Details</h4>
                         <div class="mb-3">
                             <label for="buyer_name" class="form-label">Your Name</label>
                             <input type="text" name="buyer_name" id="buyer_name" class="form-control" required>

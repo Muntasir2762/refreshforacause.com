@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\SiteSetting;
 use App\Models\SocialMedia;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('globalCampaigns', Campaign::where('status', 'live')->get());
             $view->with('categories', Category::where('status', 'live')->get());
             $view->with('socialMedia', SocialMedia::get());
+            $view->with('globalOrganizations', User::where('role', 'orgadmin')->get());
         });
     }
 }

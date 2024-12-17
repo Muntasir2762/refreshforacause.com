@@ -184,6 +184,8 @@ class ProductController extends Controller
     public function storeOrder(Request $request)
     {
 
+        //dd($request->affiliate_id);
+
         $cartProducts = Cart::when(auth()->check(), function ($query) {
             $query->where('user_id', auth()->id());
         }, function ($query) {
@@ -200,7 +202,19 @@ class ProductController extends Controller
                     $order = new Order();
 
                     //Check Affiliate Id....
-                    if (session()->has('affiliate_id') && session('affiliate_id') != "No affiliate_id is found") {
+                    if(isset($request->affiliate_id)){
+                        $order->affiliate_id = $request->affiliate_id;
+                        $orgOrOrgMember = User::where('unique_ref', $request->affiliate_id)->first();
+
+                        if($orgOrOrgMember->role == "orgadmin"){
+                            $order->org_id = $orgOrOrgMember->id;
+                        }
+                        elseif($orgOrOrgMember->role == "orgmember"){
+                            $order->org_id = $orgOrOrgMember->org_id;
+                        }
+                    }
+                    
+                    elseif (session()->has('affiliate_id') && session('affiliate_id') != "No affiliate_id is found") {
                         $order->affiliate_id = session('affiliate_id');
                         $orgOrOrgMember = User::where('unique_ref', session('affiliate_id'))->first();
 
@@ -211,6 +225,7 @@ class ProductController extends Controller
                             $order->org_id = $orgOrOrgMember->org_id;
                         }
                     }
+
                     $order->buyer_ip = $request->ip();
                     $order->buyer_id = Auth::user()->id ?? null;
                     $order->buyer_name = $request->buyer_name;
