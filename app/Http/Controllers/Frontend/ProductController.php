@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\User;
 use App\Traits\AlertTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -197,8 +198,18 @@ class ProductController extends Controller
         
                     // Create Order
                     $order = new Order();
+
+                    //Check Affiliate Id....
                     if (session()->has('affiliate_id') && session('affiliate_id') != "No affiliate_id is found") {
                         $order->affiliate_id = session('affiliate_id');
+                        $orgOrOrgMember = User::where('unique_ref', session('affiliate_id'))->first();
+
+                        if($orgOrOrgMember->role == "orgadmin"){
+                            $order->org_id = $orgOrOrgMember->id;
+                        }
+                        elseif($orgOrOrgMember->role == "orgmember"){
+                            $order->org_id = $orgOrOrgMember->org_id;
+                        }
                     }
                     $order->buyer_ip = $request->ip();
                     $order->buyer_id = Auth::user()->id ?? null;

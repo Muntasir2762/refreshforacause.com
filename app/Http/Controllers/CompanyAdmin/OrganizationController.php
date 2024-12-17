@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CompanyAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\UserStatus;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\AlertTrait;
 use App\Traits\HelperTrait;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizationController extends Controller
 {
@@ -124,5 +126,12 @@ class OrganizationController extends Controller
         $org = User::findOrFail($id);
         $org->delete();
         return back()->with($this->successAlert('Successfully Deleted!'));
+    }
+
+    public function view (string $id)
+    {
+        $org = User::findOrFail($id);
+        $orderCount = Order::where('org_id', $id)->count();
+        return view('admin.organization.org-details', compact(['org', 'orderCount']));
     }
 }

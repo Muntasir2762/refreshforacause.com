@@ -36,9 +36,10 @@
                                     <td class="text-right">
                                         <div class="row justify-content-end">
                                             <div class="mr-1">
-                                                <button class="btn btn-icon btn-hover btn-sm btn-rounded btn-success">
+                                                <a href="{{ route('manage.org.view', ['id' => $org->id]) }}"
+                                                    class="btn btn-icon btn-hover btn-sm btn-rounded btn-info">
                                                     <i class="anticon anticon-eye"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                             <div class="mr-1">
                                                 <a href="{{ route('manage.org.edit', ['id' => $org->id]) }}"

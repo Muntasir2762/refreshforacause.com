@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('buyer_id')->nullable();
             $table->string('buyer_ip')->nullable();
             $table->string('affiliate_id')->nullable();
+            $table->unsignedBigInteger('org_id')->nullable();
             $table->string('invoice_no');
             $table->string('buyer_name');
             $table->string('buyer_phone');

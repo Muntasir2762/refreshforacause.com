@@ -85,6 +85,8 @@ Route::middleware(['role:companyadmin'])
                     ->name('edit');
                 Route::post('/update/{id}', [OrganizationController::class, 'update'])
                     ->name('update');
+                Route::get('/view/{id}', [OrganizationController::class, 'view'])
+                    ->name('view');
                 // Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
                 //     ->name('delete');
             });
@@ -146,6 +148,7 @@ Route::middleware(['role:companyadmin'])
             ->group(function () {
                 Route::get('/{order_status}', [OrderController::class, 'getOrders'])->name('orders');
                 Route::post('/update-order-status', [OrderController::class, 'updateStatus'])->name('orders.status');
+                Route::get('/org-order/{org_id}/{order_status}', [OrderController::class, 'getOrgOrders'])->name('orders.org');
             });
     });
 

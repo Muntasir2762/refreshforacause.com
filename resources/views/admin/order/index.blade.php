@@ -10,12 +10,45 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-12">
+            @if ($type == "generalorder")
             <form action="{{ route('manage.orders', ['all']) }}" method="GET" class="d-flex">
+            @elseif ($type == "orgorder")    
+            <form action="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" method="GET" class="d-flex">
+            @endif
                 @csrf
                 <input type="text" id="db_search" name="db_search" class="form-control mr-2"
                     placeholder="Put Order ID or Phone...">
                 <button type="submit" class="btn btn-primary">Search</button>
+                @if ($type == "generalorder")
                 <a href="{{ route('manage.orders', ['all']) }}" class="btn btn-secondary ml-2">Clear</a>
+                @elseif ($type == "orgorder")
+                <a href="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
+                @endif
+            </form>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            @if ($type == "generalorder")
+            <form action="{{ route('manage.orders', ['all']) }}" method="GET" class="d-flex">
+            @elseif ($type == "orgorder")    
+            <form action="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" method="GET" class="d-flex">
+            @endif
+                @csrf
+                <select name="status_search" id="status_search" class="form-control mr-2">
+                    <option value="" selected disabled>Filter Order By Order Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                    <option value="returned">Returned</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Search</button>
+                @if ($type == "generalorder")
+                <a href="{{ route('manage.orders', ['all']) }}" class="btn btn-secondary ml-2">Clear</a>
+                @elseif ($type == "orgorder")
+                <a href="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
+                @endif
             </form>
         </div>
     </div>
