@@ -9,7 +9,7 @@
         {{-- Company Admin... --}}
         @if (Auth::user()->role == 'companyadmin')
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.orders', ['pending']) }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -17,7 +17,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">3,685</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\Order::where('status', 'pending')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Pending Orders</p>
                                 </div>
                             </div>
@@ -26,7 +28,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.orders', ['confirmed']) }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -34,7 +36,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">3,685</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\Order::where('status', 'confirmed')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Confirmed Orders</p>
                                 </div>
                             </div>
@@ -43,7 +47,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.orders', ['delivered']) }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -51,7 +55,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">3,685</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\Order::where('status', 'delivered')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Delivered Orders</p>
                                 </div>
                             </div>
@@ -60,7 +66,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.orders', ['cancelled']) }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -68,7 +74,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">3,685</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\Order::where('status', 'cancelled')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Cancelled Orders</p>
                                 </div>
                             </div>
@@ -77,7 +85,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.orders', ['returned']) }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -85,7 +93,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">3,685</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\Order::where('status', 'returned')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Returned Orders</p>
                                 </div>
                             </div>

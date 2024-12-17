@@ -42,6 +42,14 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="{{ route('manage.campaigns.index') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-appstore"></i>
+                        </span>
+                        <span class="title">Campaigns</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="{{ route('manage.categories.index') }}">
                         <span class="icon-holder">
                             <i class="anticon anticon-appstore"></i>
