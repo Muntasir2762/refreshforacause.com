@@ -79,4 +79,33 @@ class OrderController extends Controller
             return view('admin.order.index', compact('orders', 'order_status', 'type'));
         }
     }
+
+    public function getOrgMemberOrders (Request $request,string $org_member_ref, string $order_status)
+    {
+        $type = "orgmemberorder";
+        $query = Order::with('orderDetails', 'affiliateMember')->orderBy('id', 'desc')->where('affiliate_id', $org_member_ref);
+
+        if(isset($request->status_search)){
+            $orders = $query->where('status', $request->status_search)->paginate(300);
+            return view('admin.order.index', compact('orders', 'order_status', 'type'));
+        }
+        elseif(isset($request->db_search)){
+            $orders = $query->where(function ($query) use ($request) {
+                $query->where('buyer_phone', 'LIKE', '%' . $request->db_search . '%')
+                      ->orWhere('invoice_no', 'LIKE', '%' . $request->db_search . '%');
+            })->paginate(300);
+            
+            return view('admin.order.index', compact('orders', 'order_status', 'type'));
+        }
+        else{
+            if($order_status == "all"){
+                $orders = $query->paginate(300);
+            }
+            else{
+                $orders = $query->where('status', $order_status)->paginate(300);
+            }
+
+            return view('admin.order.index', compact('orders', 'order_status', 'type'));
+        }
+    }
 }

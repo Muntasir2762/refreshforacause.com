@@ -116,7 +116,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{route('manage.categories.index')}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -124,7 +124,9 @@
                                     <i class="anticon anticon-line-chart"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Category::count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Categories</p>
                                 </div>
                             </div>
@@ -134,7 +136,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{route('manage.products.index')}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -142,7 +144,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Product::count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Products</p>
                                 </div>
                             </div>
@@ -161,7 +165,9 @@
                                     <i class="anticon anticon-user"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\User::where('role', 'orgadmin')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Organization(s)</p>
                                 </div>
                             </div>
@@ -170,7 +176,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{ route('manage.org.member') }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -178,7 +184,9 @@
                                     <i class="anticon anticon-user"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\User::where('role', 'orgmember')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Organization Member(s)</p>
                                 </div>
                             </div>

@@ -15,6 +15,8 @@
             <form action="{{ route('manage.orders', ['all']) }}" method="GET" class="d-flex">
             @elseif ($type == "orgorder")    
             <form action="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" method="GET" class="d-flex">
+            @elseif ($type == "orgmemberorder")
+            <form action="{{route('manage.orders.org.member', [$orders[0]->affiliate_id, 'all'])}}" method="GET" class="d-flex">
             @endif
                 @csrf
                 <input type="text" id="db_search" name="db_search" class="form-control mr-2"
@@ -24,6 +26,8 @@
                 <a href="{{ route('manage.orders', ['all']) }}" class="btn btn-secondary ml-2">Clear</a>
                 @elseif ($type == "orgorder")
                 <a href="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
+                @elseif ($type == "orgmemberorder")
+                <a href="{{route('manage.orders.org.member', [$orders[0]->affiliate_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
                 @endif
             </form>
         </div>
@@ -34,6 +38,8 @@
             <form action="{{ route('manage.orders', ['all']) }}" method="GET" class="d-flex">
             @elseif ($type == "orgorder")    
             <form action="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" method="GET" class="d-flex">
+            @elseif ($type == "orgmemberorder")
+            <form action="{{route('manage.orders.org.member', [$orders[0]->affiliate_id, 'all'])}}" method="GET" class="d-flex">   
             @endif
                 @csrf
                 <select name="status_search" id="status_search" class="form-control mr-2">
@@ -49,6 +55,8 @@
                 <a href="{{ route('manage.orders', ['all']) }}" class="btn btn-secondary ml-2">Clear</a>
                 @elseif ($type == "orgorder")
                 <a href="{{route('manage.orders.org', [$orders[0]->org_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
+                @elseif ($type == "orgmemberorder")
+                <a href="{{route('manage.orders.org.member', [$orders[0]->affiliate_id, 'all'])}}" class="btn btn-secondary ml-2">Clear</a>
                 @endif
             </form>
         </div>

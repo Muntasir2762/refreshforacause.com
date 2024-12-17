@@ -134,4 +134,59 @@ class OrganizationController extends Controller
         $orderCount = Order::where('org_id', $id)->count();
         return view('admin.organization.org-details', compact(['org', 'orderCount']));
     }
+
+
+    //Org Member...
+
+    public function orgMember ()
+    {
+        $orgMembers = User::where('role', 'orgmember')->with('organization')->orderBy('first_name', 'asc')->paginate(15);
+        return view('admin.organization.org-member', compact(['orgMembers']));
+    }
+
+    public function editMember (string $id)
+    {
+        $orgMember = User::findOrFail($id);
+        $statuses = UserStatus::orderBy('name', 'asc')->get();
+        return view('admin.organization.org-member-edit', compact(['orgMember', 'statuses']));
+    }
+
+    public function updateMember (Request $request)
+    {
+        $orgId = $request->id;
+        if (!$orgId) {
+            return back();
+        }
+
+        $org = User::findOrFail($orgId);
+
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $org->id,
+            'password' => 'nullable|min:6',
+            'phone' => 'nullable',
+            'status' => 'required'
+        ]);
+
+        if ($request->password) {
+            $org->password = Hash::make($request->password);
+        }
+
+        $org->first_name = $request->first_name;
+        $org->last_name = $request->last_name;
+        $org->phone = $request->phone;
+        $org->email = $request->email;
+        $org->full_name_slug = Str::slug($request->name);
+        $org->status = $request->status;
+
+        $org->save();
+
+        return back()->with($this->successAlert('Successfully Updated!'));
+    }
+
+    public function viewMember (string $id)
+    {
+        $orgMember = User::findOrFail($id);
+        $orderCount = Order::where('affiliate_id', $orgMember->unique_ref)->count();
+        return view('admin.organization.org-member-details', compact(['orgMember', 'orderCount']));
+    }
 }

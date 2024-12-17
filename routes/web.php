@@ -91,7 +91,23 @@ Route::middleware(['role:companyadmin'])
                     ->name('update');
                 Route::get('/view/{id}', [OrganizationController::class, 'view'])
                     ->name('view');
-                // Route::delete('remove/{id}', [OrganizationController::class, 'destroy'])
+                // Route::delete('/remove/{id}', [OrganizationController::class, 'destroy'])
+                //     ->name('delete');
+
+                //Org Member..
+                Route::get('/member', [OrganizationController::class, 'orgMember'])
+                    ->name('member');
+                Route::get('/member/add', [OrganizationController::class, 'createMember'])
+                    ->name('member.add');
+                Route::post('/member/store', [OrganizationController::class, 'storeMember'])
+                    ->name('member.store');
+                Route::get('/member/edit/{id}', [OrganizationController::class, 'editMember'])
+                    ->name('member.edit');
+                Route::post('/member/update/{id}', [OrganizationController::class, 'updateMember'])
+                    ->name('member.update');
+                Route::get('/member/view/{id}', [OrganizationController::class, 'viewMember'])
+                    ->name('member.view');
+                // Route::delete('/member/remove/{id}', [OrganizationController::class, 'destroyMember'])
                 //     ->name('delete');
             });
 
@@ -166,6 +182,9 @@ Route::middleware(['role:companyadmin'])
                 Route::get('/{order_status}', [OrderController::class, 'getOrders'])->name('orders');
                 Route::post('/update-order-status', [OrderController::class, 'updateStatus'])->name('orders.status');
                 Route::get('/org-order/{org_id}/{order_status}', [OrderController::class, 'getOrgOrders'])->name('orders.org');
+
+                //Org Member Orders...
+                Route::get('/org-member-order/{org_member_ref}/{order_status}', [OrderController::class, 'getOrgMemberOrders'])->name('orders.org.member');
             });
     });
 
