@@ -225,7 +225,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-                <a href="#">
+                <a href="{{route('manage.member.index')}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center">
@@ -233,7 +233,9 @@
                                     <i class="anticon anticon-user"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0">1,832</h2>
+                                    <h2 class="m-b-0">
+                                        {{ \App\Models\User::where('org_id', Auth::user()->id)->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted">Members</p>
                                 </div>
                             </div>
@@ -251,7 +253,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Order::where('org_id', Auth::user()->id)->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Organization's Orders</p>
                                 </div>
                             </div>
@@ -260,7 +264,7 @@
                 </a>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
@@ -276,7 +280,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
             {{-- <div class="col-md-6 col-lg-3">
                 <a href="#">
@@ -306,7 +310,9 @@
                                     <i class="anticon anticon-line-chart"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Campaign::where('status', 'live')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Campaigns</p>
                                 </div>
                             </div>
@@ -342,7 +348,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Product::count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Products</p>
                                 </div>
                             </div>
@@ -380,7 +388,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Order::where('affiliate_id', Auth::user()->unique_ref)->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Orders</p>
                                 </div>
                             </div>
@@ -417,7 +427,9 @@
                                     <i class="anticon anticon-line-chart"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Campaign::where('status', 'live')->count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Campaigns</p>
                                 </div>
                             </div>
@@ -453,7 +465,9 @@
                                     <i class="anticon anticon-profile"></i>
                                 </div>
                                 <div class="m-l-15">
-                                    <h2 class="m-b-0" style="font-size: 27px">3,685</h2>
+                                    <h2 class="m-b-0" style="font-size: 27px">
+                                        {{ \App\Models\Product::count() }}
+                                    </h2>
                                     <p class="m-b-0 text-muted" style="font-size: 10px">Products</p>
                                 </div>
                             </div>
