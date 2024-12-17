@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/auth.php';
 
 
+//Site Optimization..
+Route::get('/clear' , [SiteSettingController::class, 'optimize']);
+
 //Dashboard
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

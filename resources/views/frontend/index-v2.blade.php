@@ -96,7 +96,7 @@
             <p class="text-white lead mb-4">
                 Join us in making fundraising refreshingly easy, meaningful, and efficient. Together, we can support the things that matter most.
             </p>
-            <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="{{url('store/products/water-bottle/1')}}" class="btn btn-primary btn-lg">Get Started</a>
         </div>
     </section>
 @endsection
