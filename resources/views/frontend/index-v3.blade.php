@@ -10,7 +10,7 @@
                 @foreach ($bannerImages as $bannerImage)
                     <div class="item d-flex align-items-center justify-content-center position-relative" 
                          style="background-image:url({{ asset($bannerImage->image) }}); height: 400px; background-size: cover; background-position: center;">
-                        <div class="overlay" style="background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
                         <div class="caption text-center text-white position-relative">
                             <h3 class="animated" data-start="fadeInUp" style="font-size: 2.5rem; font-weight: bold;">Welcome to <span style="color: #8a3636;">Refresh for a Cause!</span></h3>
                         </div>
