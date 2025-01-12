@@ -12,7 +12,7 @@
                          style="background-image:url({{ asset($bannerImage->image) }}); height: 400px; background-size: cover; background-position: center;">
                         <div class="overlay" style="background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
                         <div class="caption text-center text-white position-relative">
-                            <h3 class="animated" data-start="fadeInUp" style="font-size: 2.5rem; font-weight: bold;">Welcome to <span style="color: #FF6F61;">Refresh for a Cause!</span></h3>
+                            <h3 class="animated" data-start="fadeInUp" style="font-size: 2.5rem; font-weight: bold;">Welcome to <span style="color: #8a3636;">Refresh for a Cause!</span></h3>
                         </div>
                     </div>
                 @endforeach
@@ -21,7 +21,7 @@
     </section>
 
     <!-- ========================  Video Section ======================== -->
-    <section class="video-section py-5 mt-3" style="background: linear-gradient(90deg, #D7263D, #FF6F61); color: #fff;">
+    <section class="video-section py-5 mt-3" style="background: linear-gradient(90deg, #2F855A, #48BB78); color: #fff;">
         <div class="text-center">
             <h2 class="section-title mb-4 text-white">Watch Our Story</h2>
             <div class="video-container" style="max-width: 800px; margin: 0 auto;">
@@ -34,9 +34,9 @@
     </section>
 
     <!-- ========================  About Section ======================== -->
-    <section class="about-section py-5" style="background: #FFF1F0; color: #333;">
+    <section class="about-section py-5" style="background: #F0FFF4; color: #333;">
         <div class="container text-center">
-            <h2 class="section-title mb-4" style="color: #D7263D;">About Refresh for a Cause</h2>
+            <h2 class="section-title mb-4" style="color: #2F855A;">About Refresh for a Cause</h2>
             <p class="lead text-muted mb-4">
                 We’re more than just fundraising – we’re parents who saw a need for a better, more practical way to help organizations raise money.
             </p>
@@ -54,7 +54,7 @@
     </section>
 
     <!-- ========================  Fundraising Benefits Section ======================== -->
-    <section class="fundraising-benefits-section py-5" style="background: #FF6F61; color: #fff;">
+    <section class="fundraising-benefits-section py-5" style="background: #48BB78; color: #fff;">
         <div class="container text-center">
             <h2 class="section-title mb-4">Fundraising Made Easy</h2>
             <p class="text-light mb-5">
@@ -65,9 +65,9 @@
     </section>
 
     <!-- ========================  Features Section ======================== -->
-    <section class="features-section py-5" style="background: #F5F5F5; color: #333;">
+    <section class="features-section py-5" style="background: #F7FAFC; color: #333;">
         <div class="container">
-            <h2 class="section-title text-center mb-5" style="color: #D7263D;">Why Choose Us?</h2>
+            <h2 class="section-title text-center mb-5" style="color: #2F855A;">Why Choose Us?</h2>
             <div class="row text-center">
                 @foreach ([
                     ['title' => 'Simple Setup', 'image' => 'img-3.png', 'text' => 'Start raising money quickly with our easy-to-follow process.'],
@@ -77,7 +77,7 @@
                     <div class="col-md-4">
                         <div class="feature-box p-4 border rounded shadow-sm" style="background: #fff;">
                             <img src="{{ asset('frontend/assets/images/' . $feature['image']) }}" alt="{{ $feature['title'] }}" class="img-fluid mb-3 rounded" style="height: 150px; object-fit: cover;">
-                            <h5 style="color: #FF6F61;">{{ $feature['title'] }}</h5>
+                            <h5 style="color: #48BB78;">{{ $feature['title'] }}</h5>
                             <p class="text-muted">{{ $feature['text'] }}</p>
                         </div>
                     </div>
@@ -87,13 +87,13 @@
     </section>
 
     <!-- ========================  Call to Action ======================== -->
-    <section class="cta-section py-5 text-center position-relative" style="background: linear-gradient(to right, #D7263D, #FF6F61); color: #fff;">
+    <section class="cta-section py-5 text-center position-relative" style="background: linear-gradient(to right, #2F855A, #48BB78); color: #fff;">
         <div class="container">
             <h2 class="mb-4" style="font-weight: bold;">Join Us Today!</h2>
             <p class="lead mb-4">
                 Join us in making fundraising refreshingly easy, meaningful, and efficient. Together, we can support the things that matter most.
             </p>
-            <a href="{{url('store/products/water-bottle/1')}}" class="btn btn-danger btn-lg shadow-lg">Get Started</a>
+            <a href="{{url('store/products/water-bottle/1')}}" class="btn btn-success btn-lg shadow-lg">Get Started</a>
         </div>
     </section>
 
