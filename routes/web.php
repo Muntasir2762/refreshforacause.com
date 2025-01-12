@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShipStationController;
 
 require __DIR__ . '/auth.php';
 
@@ -207,6 +208,14 @@ Route::middleware(['role:orgadmin'])
             });
     });
 
+//Shipstation Routes
+Route::middleware(['role:orgadmin'])
+->group(function () {
+    
+
+});
+    Route::post('/shipstation/labels', [ShipStationController::class, 'createLabel']);
+    Route::get('/shipstation/carriers', [ShipStationController::class, 'getCarriers']);
 
 
 
