@@ -38,7 +38,7 @@
                             <select name="member_id" id="member_id" class="form-control">
                                 <option value="" disabled selected>Select a member</option>
                                 @foreach ($globalOrganitationMember as $member)
-                                    <option value="{{$member->unique_ref}}">{{$member->full_name}}</option>
+                                    <option value="{{$member->unique_ref}}">{{$member->full_name}} (Jerssy No: {{$member->id}})</option>
                                 @endforeach
                             </select>
                         </div>
