@@ -42,6 +42,25 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-deployment-unit"></i>
+                        </span>
+                        <span class="title">Members</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('manage.org.member') }}">View All</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('manage.org.member.add') }}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="{{ route('manage.campaigns.index') }}">
                         <span class="icon-holder">
                             <i class="anticon anticon-appstore"></i>

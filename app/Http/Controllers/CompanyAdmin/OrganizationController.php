@@ -144,6 +144,39 @@ class OrganizationController extends Controller
         return view('admin.organization.org-member', compact(['orgMembers']));
     }
 
+    public function createMember ()
+    {
+        return view('admin.organization.org-member-add');
+    }
+
+    public function storeMember (Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'nullable|min:6',
+            'phone' => 'nullable',
+            'org_id' => 'required'
+        ]);
+
+        $orgMember = new User();
+
+        if ($request->password) {
+            $orgMember->password = Hash::make($request->password);
+        }
+
+        $orgMember->first_name = $request->first_name;
+        $orgMember->last_name = $request->last_name;
+        $orgMember->phone = $request->phone;
+        $orgMember->email = $request->email;
+        $orgMember->full_name_slug = Str::slug($request->name);
+        $orgMember->org_id = $request->org_id;
+        $orgMember->role = "orgmember";
+
+        $orgMember->save();
+
+        return back()->with($this->successAlert('Successfully Added!'));
+    }
+
     public function editMember (string $id)
     {
         $orgMember = User::findOrFail($id);
