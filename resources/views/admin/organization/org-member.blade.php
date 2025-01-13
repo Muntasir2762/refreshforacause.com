@@ -19,7 +19,7 @@
                     <table id="data-table" class="table dataTable" role="grid" aria-describedby="data-table_info">
                         <thead>
                             <tr role="row">
-                                <th>#ID</th>
+                                <th>#ID (Jersey No.)</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
