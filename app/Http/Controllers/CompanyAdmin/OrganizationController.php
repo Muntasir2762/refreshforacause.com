@@ -164,6 +164,7 @@ class OrganizationController extends Controller
             $orgMember->password = Hash::make($request->password);
         }
 
+        $orgMember->unique_ref = $this->generateUniqueCode();
         $orgMember->first_name = $request->first_name;
         $orgMember->last_name = $request->last_name;
         $orgMember->phone = $request->phone;
