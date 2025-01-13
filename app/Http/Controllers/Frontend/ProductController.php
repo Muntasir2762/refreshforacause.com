@@ -178,7 +178,8 @@ class ProductController extends Controller
 
     public function checkOut()
     {
-        return view('frontend.pages.fe-product-checkout');
+        $globalOrganitationMember = User::where('role', 'orgmember')->orderBy('first_name', 'asc')->get();
+        return view('frontend.pages.fe-product-checkout', compact('globalOrganitationMember'));
     }
 
     public function storeOrder(Request $request)
@@ -212,6 +213,11 @@ class ProductController extends Controller
                         elseif($orgOrOrgMember->role == "orgmember"){
                             $order->org_id = $orgOrOrgMember->org_id;
                         }
+                    }
+
+                    //Direct Team Member Selection Check...
+                    if(isset($request->member_id)){
+                        $order->affiliate_id = $request->member_id;
                     }
                     
                     elseif (session()->has('affiliate_id') && session('affiliate_id') != "No affiliate_id is found") {

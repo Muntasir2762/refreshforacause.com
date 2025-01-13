@@ -33,6 +33,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="member_id" class="form-label">Select an organization member</label>
+                            <select name="member_id" id="member_id" class="form-control">
+                                <option value="" disabled selected>Select a member</option>
+                                @foreach ($globalOrganitationMember as $member)
+                                    <option value="{{$member->unique_ref}}">{{$member->full_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         @endif                     
                         <h4>Billing Details</h4>
                         <div class="mb-3">
