@@ -140,7 +140,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="thumbnail">Thumbnail Image <sup class="text-danger">*</sup></label>
-                                    <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
+                                    <input type="file" name="thumbnail[]" id="thumbnail" class="form-control" accept="image/*" multiple required>
                                     <small class="text-muted">Maximum size is 2Mb</small>
                                 </div>
                             </div>

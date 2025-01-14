@@ -229,12 +229,28 @@
                                     </div>
                                     <div class="figure-grid">
                                         <span class="badge badge-info">{{ ucFirst($product->trend_type) }}</span>
-                                        <div class="image">
+                                        {{-- Old Image.. --}}
+                                        {{-- <div class="image">
                                             <a
                                                 href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                                 <img src="{{ asset($product->thumb_large) }}" alt="{{ $product->title }}" />
                                             </a>
+                                        </div> --}}
+                                        <div class="image">
+                                            <a href="{{ route('frontend.products.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
+                                                @php
+                                                    // Decode the JSON and get the first image
+                                                    $thumbLargeArray = json_decode($product->thumb_large, true);
+                                                    $firstImage = $thumbLargeArray[0] ?? null; // Get the first image or null
+                                                @endphp
+                                                @if ($firstImage)
+                                                    <img src="{{ asset($firstImage) }}" alt="{{ $product->title }}" />
+                                                @else
+                                                    <img src="{{ asset('default-image.jpg') }}" alt="Default Image" />
+                                                @endif
+                                            </a>
                                         </div>
+                                                                                
                                         <div class="text">
                                             <h2 class="title h4">
                                                 <a

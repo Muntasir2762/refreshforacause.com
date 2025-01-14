@@ -142,7 +142,9 @@
                                     <small class="text-muted">Check/Uncheck to make the product featured/not</small>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+
+                            {{-- Old Image update input field... --}}
+                            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-auto col-2">
@@ -155,7 +157,30 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Current Thumbnail Images</label>
+                                    <div class="row mb-3">
+                                        @if ($product->thumb_small)
+                                            @php
+                                                $thumbSmallArray = json_decode($product->thumb_small, true);
+                                            @endphp
+                                            @foreach ($thumbSmallArray as $smallImage)
+                                                <div class="col-md-2 col-4 mb-2">
+                                                    <img src="{{ asset($smallImage) }}" class="img img-fluid border" alt="Thumbnail Image">
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <p>No images available.</p>
+                                        @endif
+                                    </div>
+                            
+                                    <label for="thumbnail">Replace Old Images with New Thumbnail Images</label>
+                                    <input type="file" name="thumbnail[]" id="thumbnail" class="form-control" multiple>
+                                    <small class="text-muted">Maximum size is 5Mb per image</small>
+                                </div>
+                            </div>                                                       
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Description</label>

@@ -69,7 +69,7 @@ class ProductController extends Controller
                 'trend_type' => 'nullable',
                 'is_featured' => 'nullable',
                 'description' => 'nullable',
-                'thumbnail' => 'required|image|mimes:png,jpg,jpeg|min:1|max:2049'
+                'thumbnail.*' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             ],
             [
                 'thumbnail.max' => 'Thumbnail cannot be more than 2Mb'
@@ -99,30 +99,72 @@ class ProductController extends Controller
         $product->is_featured = $request->is_featured ? true : false;
         $product->slug = Str::slug($request->title);
 
+
+        //Old Image store version....
+        // if ($request->hasFile('thumbnail')) {
+
+        //     $reqFile = $request->file('thumbnail');
+        //     $fileExtension = strtolower($reqFile->getClientOriginalExtension());
+        //     $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
+        //     $larageThumbDir = Product::THUMB_LARGE_IMAGE_DIR;
+        //     $smallThumbDir = Product::THUMB_SMALL_IMAGE_DIR;
+        //     $thumbnailName = $this->generateFileName($fileName, $fileExtension);
+
+        //     try {
+        //         Image::make($reqFile)
+        //             ->resize(760, 600)
+        //             ->save($larageThumbDir .  $thumbnailName);
+
+        //         Image::make($reqFile)
+        //             ->resize(70, 70)
+        //             ->save($smallThumbDir .  $thumbnailName);
+        //     } catch (Exception $e) {
+        //         return back()->with($this->errorAlert('Failed to upload!'));
+        //     }
+
+        //     $product->thumb_large = $larageThumbDir .  $thumbnailName;
+        //     $product->thumb_small = $smallThumbDir .  $thumbnailName;
+        // }
+
         if ($request->hasFile('thumbnail')) {
-
-            $reqFile = $request->file('thumbnail');
-            $fileExtension = strtolower($reqFile->getClientOriginalExtension());
-            $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $larageThumbDir = Product::THUMB_LARGE_IMAGE_DIR;
+            $thumbnails = $request->file('thumbnail'); // Get all uploaded files
+            $largeThumbDir = Product::THUMB_LARGE_IMAGE_DIR;
             $smallThumbDir = Product::THUMB_SMALL_IMAGE_DIR;
-            $thumbnailName = $this->generateFileName($fileName, $fileExtension);
-
-            try {
-                Image::make($reqFile)
-                    ->resize(760, 600)
-                    ->save($larageThumbDir .  $thumbnailName);
-
-                Image::make($reqFile)
-                    ->resize(70, 70)
-                    ->save($smallThumbDir .  $thumbnailName);
-            } catch (Exception $e) {
-                return back()->with($this->errorAlert('Failed to upload!'));
+        
+            // Decode existing JSON data or initialize as an empty array
+            $existingLargeThumbs = $product->thumb_large ? json_decode($product->thumb_large, true) : [];
+            $existingSmallThumbs = $product->thumb_small ? json_decode($product->thumb_small, true) : [];
+        
+            foreach ($thumbnails as $reqFile) {
+                $fileExtension = strtolower($reqFile->getClientOriginalExtension());
+                $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $thumbnailName = $this->generateFileName($fileName, $fileExtension);
+        
+                try {
+                    // Generate and save large thumbnail
+                    Image::make($reqFile)
+                        ->resize(760, 600)
+                        ->save($largeThumbDir . $thumbnailName);
+        
+                    // Generate and save small thumbnail
+                    Image::make($reqFile)
+                        ->resize(70, 70)
+                        ->save($smallThumbDir . $thumbnailName);
+        
+                    // Add new thumbnails to arrays
+                    $existingLargeThumbs[] = $largeThumbDir . $thumbnailName;
+                    $existingSmallThumbs[] = $smallThumbDir . $thumbnailName;
+                } catch (Exception $e) {
+                    return back()->with($this->errorAlert('Failed to upload one or more files!'));
+                }
             }
-
-            $product->thumb_large = $larageThumbDir .  $thumbnailName;
-            $product->thumb_small = $smallThumbDir .  $thumbnailName;
+        
+            // Save updated arrays as JSON
+            $product->thumb_large = json_encode($existingLargeThumbs);
+            $product->thumb_small = json_encode($existingSmallThumbs);
+            $product->save(); // Save the product model
         }
+        
 
         $product->save();
 
@@ -182,7 +224,7 @@ class ProductController extends Controller
                 'trend_type' => 'nullable',
                 'is_featured' => 'nullable',
                 'description' => 'nullable',
-                'thumbnail' => 'image|mimes:png,jpg,jpeg|min:1|max:2049'
+                'thumbnail.*' => 'image|mimes:png,jpg,jpeg|max:2048',
             ],
             [
                 'thumbnail.max' => 'Thumbnail cannot be more than 2Mb'
@@ -211,37 +253,89 @@ class ProductController extends Controller
         $product->is_featured = $request->is_featured ? true : false;
         $product->slug = Str::slug($request->title);
 
+        //Old Version of image update...
+        // if ($request->hasFile('thumbnail')) {
+        //     $reqFile = $request->file('thumbnail');
+        //     $fileExtension = strtolower($reqFile->getClientOriginalExtension());
+        //     $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
+        //     $larageThumbDir = Product::THUMB_LARGE_IMAGE_DIR;
+        //     $smallThumbDir = Product::THUMB_SMALL_IMAGE_DIR;
+        //     $thumbnailName = $this->generateFileName($fileName, $fileExtension);
+
+        //     try {
+        //         Image::make($reqFile)
+        //             ->resize(760, 600)
+        //             ->save($larageThumbDir .  $thumbnailName);
+
+        //         Image::make($reqFile)
+        //             ->resize(70, 70)
+        //             ->save($smallThumbDir .  $thumbnailName);
+
+        //         if ($product->thumb_large && file_exists($product->thumb_large)) {
+        //             unlink($product->thumb_large);
+        //         }
+
+        //         if ($product->thumb_small && file_exists($product->thumb_small)) {
+        //             unlink($product->thumb_small);
+        //         }
+        //     } catch (Exception $e) {
+        //         return back()->with($this->errorAlert('Failed to upload!'));
+        //     }
+
+        //     $product->thumb_large = $larageThumbDir .  $thumbnailName;
+        //     $product->thumb_small = $smallThumbDir .  $thumbnailName;
+        // }
+
         if ($request->hasFile('thumbnail')) {
-            $reqFile = $request->file('thumbnail');
-            $fileExtension = strtolower($reqFile->getClientOriginalExtension());
-            $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
             $larageThumbDir = Product::THUMB_LARGE_IMAGE_DIR;
             $smallThumbDir = Product::THUMB_SMALL_IMAGE_DIR;
-            $thumbnailName = $this->generateFileName($fileName, $fileExtension);
-
-            try {
-                Image::make($reqFile)
-                    ->resize(760, 600)
-                    ->save($larageThumbDir .  $thumbnailName);
-
-                Image::make($reqFile)
-                    ->resize(70, 70)
-                    ->save($smallThumbDir .  $thumbnailName);
-
-                if ($product->thumb_large && file_exists($product->thumb_large)) {
-                    unlink($product->thumb_large);
+            $largeThumbnails = [];
+            $smallThumbnails = [];
+        
+            foreach ($request->file('thumbnail') as $reqFile) {
+                $fileExtension = strtolower($reqFile->getClientOriginalExtension());
+                $fileName = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $thumbnailName = $this->generateFileName($fileName, $fileExtension);
+        
+                try {
+                    // Save large thumbnail
+                    Image::make($reqFile)
+                        ->resize(760, 600)
+                        ->save($larageThumbDir . $thumbnailName);
+                    $largeThumbnails[] = $larageThumbDir . $thumbnailName;
+        
+                    // Save small thumbnail
+                    Image::make($reqFile)
+                        ->resize(70, 70)
+                        ->save($smallThumbDir . $thumbnailName);
+                    $smallThumbnails[] = $smallThumbDir . $thumbnailName;
+        
+                } catch (Exception $e) {
+                    return back()->with($this->errorAlert('Failed to upload!'));
                 }
-
-                if ($product->thumb_small && file_exists($product->thumb_small)) {
-                    unlink($product->thumb_small);
-                }
-            } catch (Exception $e) {
-                return back()->with($this->errorAlert('Failed to upload!'));
             }
-
-            $product->thumb_large = $larageThumbDir .  $thumbnailName;
-            $product->thumb_small = $smallThumbDir .  $thumbnailName;
-        }
+        
+            // Delete old thumbnails if they exist
+            if ($product->thumb_large) {
+                foreach (json_decode($product->thumb_large, true) as $oldLargeThumb) {
+                    if (file_exists($oldLargeThumb)) {
+                        unlink($oldLargeThumb);
+                    }
+                }
+            }
+        
+            if ($product->thumb_small) {
+                foreach (json_decode($product->thumb_small, true) as $oldSmallThumb) {
+                    if (file_exists($oldSmallThumb)) {
+                        unlink($oldSmallThumb);
+                    }
+                }
+            }
+        
+            // Save new thumbnails as JSON arrays
+            $product->thumb_large = json_encode($largeThumbnails);
+            $product->thumb_small = json_encode($smallThumbnails);
+        }        
 
         $product->save();
 

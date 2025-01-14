@@ -29,9 +29,23 @@
                                 @foreach ($products as $product)
                                     <tr>
                                         <td>{{ $product->sku_id }}</td>
-                                        <td>
+                                        {{-- Old Image... --}}
+                                        {{-- <td>
                                             <img src="{{ asset($product->thumb_small) }}" alt="">
-                                        </td>
+                                        </td> --}}
+                                        <td>
+                                            @php
+                                                // Decode the JSON and get the first image
+                                                $thumbSmallArray = json_decode($product->thumb_small, true);
+                                                $firstImage = $thumbSmallArray[0] ?? null; // Get the first image or null if not available
+                                            @endphp
+                                        
+                                            @if ($firstImage)
+                                                <img src="{{ asset($firstImage) }}" alt="Thumbnail Image">
+                                            @else
+                                                <img src="{{ asset('default-image.jpg') }}" alt="Default Image">
+                                            @endif
+                                        </td>                                        
                                         <td>
                                             {{ $product->title }}
                                         </td>

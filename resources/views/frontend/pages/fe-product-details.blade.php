@@ -175,14 +175,27 @@
 
                         <!--product gallery-->
 
-                        <div class="owl-product-gallery owl-carousel owl-theme open-popup-gallery">
+                        {{-- Old Image Gallery... --}}
+                        {{-- <div class="owl-product-gallery owl-carousel owl-theme open-popup-gallery">
                             @for ($i = 0; $i <= 0; $i++)
                                 <a href="/{{ $singleProduct->thumb_large }}">
                                     <img src="{{ asset($singleProduct->thumb_large) }}"
                                         alt="{{ $singleProduct->title }}" />
                                 </a>
                             @endfor
+                        </div> --}}
+                        <div class="owl-product-gallery owl-carousel owl-theme open-popup-gallery">
+                            @if ($singleProduct->thumb_large)
+                                @foreach (json_decode($singleProduct->thumb_large, true) as $image)
+                                    <a href="/{{ $image }}">
+                                        <img src="{{ asset($image) }}" alt="{{ $singleProduct->title }}" />
+                                    </a>
+                                @endforeach
+                            @else
+                                <p>No images available</p>
+                            @endif
                         </div>
+                        
                     </div>
 
                     <!-- Modal -->
